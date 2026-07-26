@@ -29,11 +29,15 @@ data/interim/
 data/processed/
 
 # Dataset volumineux (MovieLens)
-data/ml-latest-small/ratings.csv
-data/ml-latest-small/movies.csv
-data/ml-latest-small/tags.csv
-data/ml-latest-small/links.csv
+data/ml-latest-small/
 *.zip
+
+# Fichiers npm racine (md-to-pdf, etc.)
+/package.json
+/package-lock.json
+
+# Fichier Windows parasite
+nul
 
 # Modèles entraînés (peuvent être gros)
 models/*.pkl
