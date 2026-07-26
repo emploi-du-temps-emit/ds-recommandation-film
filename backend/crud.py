@@ -6,7 +6,7 @@ Fonctions pour interagir avec la base de données PostgreSQL.
 
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from passlib.hash import bcrypt
+import bcrypt
 from typing import List, Optional
 import pandas as pd
 
@@ -30,7 +30,7 @@ def get_user_by_email(db: Session, email: str) -> Optional[models.User]:
 
 def create_user(db: Session, user: schemas.UserCreate) -> models.User:
     """Crée un nouvel utilisateur avec mot de passe hashé"""
-    hashed_password = bcrypt.hash(user.password)
+    hashed_password = bcrypt.hashpw(user.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
     db_user = models.User(
         username=user.username,
         email=user.email,
@@ -49,7 +49,10 @@ def authenticate_user(
     user = get_user_by_email(db, email)
     if not user:
         return None
-    if not bcrypt.verify(password, user.password_hash):
+    try:
+        if not bcrypt.checkpw(password.encode("utf-8"), user.password_hash.encode("utf-8")):
+            return None
+    except Exception:
         return None
     return user
 
