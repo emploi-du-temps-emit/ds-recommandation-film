@@ -256,8 +256,8 @@ function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRa
           background: `linear-gradient(135deg, hsla(${hue1}, 70%, 40%, 0.3), hsla(${(hue1 + 60) % 360}, 70%, 50%, 0.2))`,
         }}
       >
-        <div className="w-12 h-12 bg-gradient-to-br from-yellow-500/40 to-amber-500/40 rounded-xl flex items-center justify-center text-base font-bold text-white/50 group-hover:scale-110 transition-transform duration-300">
-          MR
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <Image src="/favicon.svg" alt="MovieReco" width={36} height={36} unoptimized className="opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
         </div>
         {predictedRating && (
           <div className="absolute top-2 right-2 bg-gradient-to-br from-yellow-400 to-amber-500 text-gray-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Movie } from "@/services/api";
 import RatingStars from "./RatingStars";
 
@@ -81,11 +82,10 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
           )}
 
           {/* Icon */}
-          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold 
-                          text-white/50 relative z-10 transition-all duration-500 
-                          ${isHovered ? "scale-110 rotate-3 bg-gradient-to-br from-yellow-500/50 to-amber-500/50" : "bg-gradient-to-br from-yellow-500/30 to-amber-500/30"}`}
+          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center relative z-10 transition-all duration-500 
+                          ${isHovered ? "scale-110 rotate-3" : ""}`}
           >
-            MR
+            <Image src="/favicon.svg" alt="MovieReco" width={48} height={48} unoptimized className={`transition-all duration-500 ${isHovered ? "opacity-90 scale-110" : "opacity-60"}`} />
           </div>
 
           {/* Prédiction badge */}

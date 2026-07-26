@@ -7,6 +7,7 @@ import RecommendationsList from "@/components/RecommendationsList";
 import { api, Movie, Rating } from "@/services/api";
 import { useToast } from "@/context/ToastContext";
 import { Check } from "lucide-react";
+import Image from "next/image";
 import RatingStars from "@/components/RatingStars";
 
 export default function ProfilePage() {
@@ -222,8 +223,8 @@ export default function ProfilePage() {
                     href={`/movies/${rating.movie_id}`}
                     className="flex items-center space-x-4 flex-1 min-w-0"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-yellow-500/30 to-amber-500/30 rounded-xl flex items-center justify-center text-sm font-bold text-white/60 shrink-0">
-                      MR
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-yellow-500/20 to-amber-500/20">
+                      <Image src="/favicon.svg" alt="MovieReco" width={32} height={32} unoptimized className="opacity-70" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-[var(--text-primary)] font-medium text-sm truncate group-hover:text-yellow-400 transition-colors">
