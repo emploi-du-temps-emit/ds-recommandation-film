@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { ToastProvider } from "@/context/ToastContext";
+import ToastContainer from "@/components/ToastContainer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,15 +33,39 @@ export default function RootLayout({
     <html
       lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-gradient-to-br from-gray-900 via-purple-950 to-gray-900 text-white">
-        <Navbar />
-        <main className="flex-1 container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <footer className="border-t border-white/10 py-6 text-center text-sm text-gray-500">
-          <p>MovieReco &copy; {new Date().getFullYear()} - Propulsé par l&apos;IA</p>
-        </footer>
+      <body className="min-h-full flex flex-col bg-gradient-to-br from-[var(--bg-gradient-from)] via-[var(--bg-gradient-via)] to-[var(--bg-gradient-to)] text-[var(--text-primary)]">
+        <ThemeProvider>
+          <ToastProvider>
+            <Navbar />
+            <main className="flex-1 container mx-auto px-4 py-8">
+              {children}
+            </main>
+            <footer className="border-t border-[var(--footer-border)] py-8 text-center text-sm text-[var(--text-muted)]">
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
+                    <span className="font-medium bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      MovieReco
+                    </span>
+                  </div>
+                  <p>
+                    &copy; {new Date().getFullYear()} - Propulsé par l&apos;IA &amp; le Machine Learning
+                  </p>
+                  <div className="flex items-center space-x-4 text-[var(--text-muted)]">
+                    <span className="hover:text-[var(--text-primary)] transition-colors cursor-pointer">À propos</span>
+                    <span className="hover:text-[var(--text-primary)] transition-colors cursor-pointer">Confidentialité</span>
+                    <span className="hover:text-[var(--text-primary)] transition-colors cursor-pointer">Contact</span>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            <ToastContainer />
+            <ScrollToTop />
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api, Movie, MovieRecommendation } from "@/services/api";
 import RatingStars from "@/components/RatingStars";
+import { useToast } from "@/context/ToastContext";
 
 export default function MovieDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const { success, error: toastError } = useToast();
   const movieId = Number(params.id);
 
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -15,7 +17,6 @@ export default function MovieDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const [userRating, setUserRating] = useState(0);
   const [recommendations, setRecommendations] = useState<MovieRecommendation[]>([]);
-  const [showToast, setShowToast] = useState(false);
 
   const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
   const isAuthenticated = typeof window !== "undefined" ? !!localStorage.getItem("token") : false;
@@ -34,13 +35,6 @@ export default function MovieDetailPage() {
     fetchMovie();
   }, [movieId]);
 
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => setShowToast(false), 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
-
   const handleRate = async (rating: number) => {
     if (!userId) {
       router.push("/login");
@@ -49,13 +43,17 @@ export default function MovieDetailPage() {
     try {
       await api.rateMovie(parseInt(userId), movieId, rating);
       setUserRating(rating);
-      setShowToast(true);
+      if (rating === 0) {
+        toastError("Note retirée");
+      } else {
+        success(`Film noté ${rating}/5`);
 
-      // Charger les recommandations après une note
-      const recs = await api.getRecommendations(parseInt(userId), 5);
-      setRecommendations(recs);
+        // Charger les recommandations après une note
+        const recs = await api.getRecommendations(parseInt(userId), 6);
+        setRecommendations(recs);
+      }
     } catch {
-      // Silently handle
+      toastError("Erreur lors de la notation");
     }
   };
 
@@ -64,7 +62,7 @@ export default function MovieDetailPage() {
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-400">Chargement du film...</p>
+          <p className="text-[var(--text-secondary)]">Chargement du film...</p>
         </div>
       </div>
     );
@@ -73,13 +71,17 @@ export default function MovieDetailPage() {
   if (error || !movie) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-white mx-auto">MR</div>
-          <h1 className="text-2xl font-bold text-white mt-4 mb-2">Film non trouvé</h1>
-          <p className="text-gray-400 mb-6">{error}</p>
+        <div className="text-center animate-fade-in-up">
+          <div className="w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white/30 mx-auto mb-6">
+            ??
+          </div>
+          <h1 className="text-3xl font-bold text-[var(--text-primary)] mt-4 mb-2">Film non trouvé</h1>
+          <p className="text-[var(--text-secondary)] mb-8">{error || "Ce film n'existe pas dans notre catalogue."}</p>
           <button
             onClick={() => router.push("/")}
-            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 
+                       text-white rounded-xl font-medium hover:opacity-90 
+                       transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25"
           >
             Retour à l&apos;accueil
           </button>
@@ -88,49 +90,62 @@ export default function MovieDetailPage() {
     );
   }
 
-  const genres = movie.genres.split("|");
+  const genres = movie.genres.split("|").filter(Boolean);
   const yearMatch = movie.title.match(/\((\d{4})\)/);
   const year = yearMatch ? yearMatch[1] : "";
   const cleanTitle = movie.title.replace(/\s*\(\d{4}\)/, "");
 
-  return (
-    <div className="space-y-8">
-      {/* Toast notification */}
-      {showToast && (
-        <div className="fixed top-20 right-4 z-50 bg-green-600/90 text-white px-6 py-3 rounded-xl shadow-2xl animate-slide-in">
-          ✅ Note enregistrée ! ({userRating}/5)
-        </div>
-      )}
+  // Générer des couleurs uniques pour le gradient du poster
+  const hue1 = ((movie.id * 137.508) % 360);
+  const hue2 = ((movie.id * 237.508 + 60) % 360);
 
+  return (
+    <div className="space-y-8 animate-fade-in-up">
       {/* Hero du film */}
-      <div className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10">
+      <div className="bg-[var(--card-bg)] backdrop-blur-lg rounded-2xl overflow-hidden border border-[var(--card-border)]">
         <div className="md:flex">
-          {/* Poster */}
-          <div className="md:w-80 h-80 md:h-auto bg-gradient-to-br from-purple-600/30 via-blue-500/20 to-pink-500/30 flex items-center justify-center shrink-0">
-            <div className="w-24 h-24 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center text-3xl font-bold text-white/50 mx-auto">MR</div>
+          {/* Poster avec gradient */}
+          <div
+            className="md:w-96 h-80 md:h-auto flex items-center justify-center shrink-0 relative"
+            style={{
+              background: `linear-gradient(135deg, hsla(${hue1}, 60%, 30%, 0.4), hsla(${hue2}, 60%, 40%, 0.3))`,
+            }}
+          >
+            <div className="w-28 h-28 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
+              MR
+            </div>
           </div>
 
           {/* Infos */}
-          <div className="p-8 flex-1">
-            <div className="flex items-start justify-between mb-4">
+          <div className="p-8 md:p-10 flex-1">
+            <div className="flex items-start justify-between mb-6">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-2">
                   {cleanTitle}
                 </h1>
-                <div className="flex items-center space-x-3 text-gray-400">
-                  {year && <span>{year}</span>}
-                  <span className="text-gray-600">•</span>
+                <div className="flex items-center space-x-3 text-sm text-[var(--text-secondary)]">
+                  {year && (
+                    <>
+                      <span>{year}</span>
+                      <span className="text-[var(--text-muted)]">•</span>
+                    </>
+                  )}
                   <span>ID: {movie.id}</span>
+                  <span className="text-[var(--text-muted)]">•</span>
+                  <span>{genres.length} genre{genres.length > 1 ? "s" : ""}</span>
                 </div>
               </div>
             </div>
 
             {/* Genres */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-8">
               {genres.map((genre) => (
                 <span
                   key={genre}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-purple-600/30 text-purple-300 border border-purple-500/30"
+                  className="px-3 py-1 rounded-full text-xs font-medium 
+                             bg-purple-500/15 text-purple-400 
+                             border border-purple-500/20
+                             hover:bg-purple-500/25 transition-colors cursor-default"
                 >
                   {genre}
                 </span>
@@ -138,34 +153,45 @@ export default function MovieDetailPage() {
             </div>
 
             {/* Notation */}
-            <div className="bg-white/5 rounded-xl p-6 mb-6">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                {isAuthenticated ? "Votre note" : "Connectez-vous pour noter"}
-              </h3>
+            <div className="bg-[var(--skeleton-bg)] rounded-xl p-6 mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-[var(--text-primary)]">
+                  {isAuthenticated ? "Votre note" : "Connectez-vous pour noter"}
+                </h3>
+                {userRating > 0 && (
+                  <span className="text-sm font-medium text-yellow-400">
+                    {userRating}/5
+                  </span>
+                )}
+              </div>
               <RatingStars
                 initialRating={userRating}
                 onRate={handleRate}
                 size="lg"
+                showLabel
               />
-              {userRating > 0 && (
-                <p className="text-gray-400 text-sm mt-2">
-                  Vous avez noté ce film {userRating}/5
-                </p>
-              )}
             </div>
 
-            {/* Informations additionnelles */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-              <div className="bg-white/5 rounded-lg p-3">
-                <span className="text-gray-500">Genres</span>
-                <p className="text-white font-medium">{genres.length}</p>
+            {/* Infos additionnelles */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
+                <p className="text-xs text-[var(--text-muted)] mb-1">Genres</p>
+                <p className="text-lg font-bold text-[var(--text-primary)]">{genres.length}</p>
               </div>
-              {movie.release_year && (
-                <div className="bg-white/5 rounded-lg p-3">
-                  <span className="text-gray-500">Année</span>
-                  <p className="text-white font-medium">{movie.release_year}</p>
+              {year && (
+                <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
+                  <p className="text-xs text-[var(--text-muted)] mb-1">Année</p>
+                  <p className="text-lg font-bold text-[var(--text-primary)]">{year}</p>
                 </div>
               )}
+              <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
+                <p className="text-xs text-[var(--text-muted)] mb-1">ID Film</p>
+                <p className="text-lg font-bold text-[var(--text-primary)]">#{movie.id}</p>
+              </div>
+              <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
+                <p className="text-xs text-[var(--text-muted)] mb-1">Note des utilisateurs</p>
+                <p className="text-lg font-bold text-[var(--text-primary)]">—</p>
+              </div>
             </div>
           </div>
         </div>
@@ -173,49 +199,78 @@ export default function MovieDetailPage() {
 
       {/* Recommandations basées sur ce film */}
       {recommendations.length > 0 && (
-        <section>
-          <h2 className="text-2xl font-bold text-white mb-6">
-            Films similaires
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <section className="animate-fade-in-up animate-delay-200">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+              Films similaires
+            </h2>
+            <span className="text-sm text-[var(--text-muted)]">
+              Basés sur vos goûts
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {recommendations.map((rec, index) => (
               <div
                 key={rec.movie.id}
                 className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${index * 80}ms` }}
               >
-                <MovieCardSimple movie={rec.movie} />
+                <MovieCardSimple movie={rec.movie} predictedRating={rec.predicted_rating} />
               </div>
             ))}
           </div>
         </section>
       )}
 
+      {/* Retour */}
       <button
         onClick={() => router.push("/")}
-        className="text-gray-400 hover:text-white transition-colors text-sm"
+        className="inline-flex items-center space-x-2 text-[var(--text-secondary)] 
+                   hover:text-[var(--text-primary)] transition-colors text-sm group"
       >
-        ← Retour à l&apos;accueil
+        <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+        <span>Retour à l&apos;accueil</span>
       </button>
     </div>
   );
 }
 
 // Mini MovieCard pour les recommandations sur la page détail
-function MovieCardSimple({ movie }: { movie: Movie }) {
+function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRating?: number }) {
   const router = useRouter();
   const cleanTitle = movie.title.replace(/\s*\(\d{4}\)/, "");
-  const genres = movie.genres.split("|").slice(0, 2);
+  const genres = movie.genres.split("|").filter(Boolean).slice(0, 2);
+  const hue1 = ((movie.id * 137.508) % 360);
+
   return (
-    <div className="bg-white/5 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+    <div
+      className="bg-[var(--card-bg)] rounded-xl overflow-hidden border border-[var(--card-border)]
+                 hover:bg-[var(--card-hover)] transition-all duration-300 
+                 hover:scale-[1.03] hover:shadow-lg hover:shadow-purple-500/5 cursor-pointer group"
       onClick={() => router.push(`/movies/${movie.id}`)}
     >
-      <div className="h-32 bg-gradient-to-br from-purple-600/30 to-pink-500/30 flex items-center justify-center">
-        <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-lg font-bold text-white">MR</div>
+      <div
+        className="h-28 flex items-center justify-center relative"
+        style={{
+          background: `linear-gradient(135deg, hsla(${hue1}, 70%, 40%, 0.3), hsla(${(hue1 + 60) % 360}, 70%, 50%, 0.2))`,
+        }}
+      >
+        <div className="w-12 h-12 bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-xl flex items-center justify-center text-base font-bold text-white/50 group-hover:scale-110 transition-transform duration-300">
+          MR
+        </div>
+        {predictedRating && (
+          <div className="absolute top-2 right-2 bg-gradient-to-br from-yellow-400 to-amber-500 text-gray-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            ★ {predictedRating.toFixed(1)}
+          </div>
+        )}
       </div>
       <div className="p-3">
-        <p className="text-white text-sm font-medium truncate">{cleanTitle}</p>
-        <p className="text-gray-500 text-xs mt-1">{genres.join(", ")}</p>
+        <p className="text-[var(--text-primary)] text-sm font-medium truncate group-hover:text-purple-400 transition-colors">
+          {cleanTitle}
+        </p>
+        <p className="text-[var(--text-muted)] text-xs mt-1 truncate">{genres.join(", ")}</p>
       </div>
     </div>
   );

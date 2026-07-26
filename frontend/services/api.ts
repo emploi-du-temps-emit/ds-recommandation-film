@@ -134,6 +134,12 @@ export const api = {
     return res.data;
   },
 
+  // === Notes utilisateur ===
+  getUserRatings: async (userId: number): Promise<Rating[]> => {
+    const res = await client.get(`/users/${userId}/ratings`);
+    return res.data;
+  },
+
   // === Stats ===
   getStats: async () => {
     const res = await client.get("/stats");

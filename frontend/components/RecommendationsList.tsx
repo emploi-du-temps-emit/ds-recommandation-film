@@ -42,10 +42,18 @@ export default function RecommendationsList() {
   if (loading) {
     return (
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Pour vous</h2>
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
+          Pour vous
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-64 bg-white/5 rounded-xl animate-pulse" />
+            <div key={i} className="rounded-xl overflow-hidden">
+              <div className="h-48 skeleton-pulse" />
+              <div className="p-4 space-y-2">
+                <div className="h-4 w-3/4 skeleton-pulse rounded" />
+                <div className="h-3 w-1/2 skeleton-pulse rounded" />
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -55,8 +63,15 @@ export default function RecommendationsList() {
   if (error) {
     return (
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Pour vous</h2>
-        <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-4 text-center">
+        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
+          Recommandations
+        </h2>
+        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-6 text-center animate-scale-in">
+          <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg className="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
           <p className="text-yellow-400 text-sm">{error}</p>
         </div>
       </section>
@@ -66,11 +81,13 @@ export default function RecommendationsList() {
   if (recommendations.length === 0) return null;
 
   return (
-    <section>
+    <section className="animate-fade-in-up">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-white">Recommandé pour vous</h2>
-        <span className="text-sm text-gray-500">
-          Basé sur vos évaluations
+        <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+          Recommandé pour vous
+        </h2>
+        <span className="text-xs text-[var(--text-muted)] bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">
+          IA • Prédictions personnalisées
         </span>
       </div>
 

@@ -197,6 +197,16 @@ def get_recommendations(
     return result
 
 
+@app.get("/users/{user_id}/ratings", response_model=List[schemas.Rating])
+def get_user_ratings(
+    user_id: int,
+    db: Session = Depends(get_db),
+):
+    """Récupère toutes les évaluations d'un utilisateur"""
+    ratings = crud.get_user_ratings(db, user_id)
+    return ratings
+
+
 @app.post("/users", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     """Crée un nouveau compte utilisateur"""
