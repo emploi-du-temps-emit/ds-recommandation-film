@@ -1,11 +1,11 @@
 """
-Script d'import des données MovieLens
+Script d'import des donnees MovieLens
 ======================================
-Importe les films et évaluations depuis les fichiers CSV de MovieLens
-dans la base de données PostgreSQL.
+Importe les films et evaluations depuis les fichiers CSV de MovieLens
+dans la base de donnees PostgreSQL.
 
 Usage:
-    python seed_data.py                  # Importe depuis les chemins par défaut
+    python seed_data.py                  # Importe depuis les chemins par defaut
     python seed_data.py --movies data/movies.csv --ratings data/ratings.csv
     python seed_data.py --clear           # Vide les tables avant d'importer
 """
@@ -26,28 +26,48 @@ from crud import bulk_import_movies
 
 def import_ratings(db, ratings_path: str, batch_size: int = 1000) -> int:
     """
-    Importe les évaluations depuis le CSV MovieLens.
+    Importe les evaluations depuis le CSV MovieLens.
 
-    Note : les évaluations importées sont liées à des utilisateurs
+    Note : les evaluations importees sont liees a des utilisateurs
     du dataset original (userId de MovieLens). Pour l'application,
-    seules les évaluations faites via l'API sont utilisées.
+    seules les evaluations faites via l'API sont utilisees.
     """
     if not os.path.exists(ratings_path):
-        print(f"[Warning] Fichier non trouvé : {ratings_path}")
+        print(f"[Warning] Fichier non trouve : {ratings_path}")
         return 0
 
-    print(f"[Import] Import des évaluations depuis {ratings_path}...")
+    print(f"[Import] Import des evaluations depuis {ratings_path}...")
     df = pd.read_csv(ratings_path)
-    print(f"   {len(df)} évaluations trouvées dans le CSV")
+    print(f"   {len(df)} evaluations trouvees dans le CSV")
 
-    # On importe les évaluations comme données d'entraînement
-    # (elles seront utilisées par le modèle mais pas par l'API)
+    # === Etape 1 : Creer les utilisateurs du dataset ===
+    # Les ratings referencent des userId (decales de +10000) qui
+    # doivent exister dans la table users (contrainte FK).
+    print("   Creation des utilisateurs du dataset...")
+    unique_user_ids = df["userId"].unique()
+    users_created = 0
+    for uid in unique_user_ids:
+        mapped_id = int(uid) + 10000
+        existing = db.query(models.User).filter(models.User.id == mapped_id).first()
+        if not existing:
+            user = models.User(
+                id=mapped_id,
+                username=f"movielens_{mapped_id}",
+                email=f"movielens_{mapped_id}@seed.local",
+                password_hash="seed_user_not_for_login",
+            )
+            db.add(user)
+            users_created += 1
+    db.commit()
+    print(f"   {users_created} utilisateurs crees pour le dataset")
+
+    # === Etape 2 : Importer les evaluations ===
     count = 0
     for _, row in df.iterrows():
         existing = (
             db.query(models.Rating)
             .filter(
-                models.Rating.user_id == row["userId"] + 10000,  # Décalage pour éviter les conflits
+                models.Rating.user_id == row["userId"] + 10000,
                 models.Rating.movie_id == row["movieId"],
             )
             .first()
@@ -63,27 +83,27 @@ def import_ratings(db, ratings_path: str, batch_size: int = 1000) -> int:
 
             if count % batch_size == 0:
                 db.commit()
-                print(f"   {count} évaluations importées...")
+                print(f"   {count} evaluations importees...")
 
     db.commit()
-    print(f"✅ {count} évaluations importées avec succès")
+    print(f"[OK] {count} evaluations importees avec succes")
     return count
 
 
 def clear_tables(db):
-    """Vide les tables de la base de données."""
-    print("[Delete] Suppression des données existantes...")
+    """Vide les tables de la base de donnees."""
+    print("[Delete] Suppression des donnees existantes...")
     db.query(models.Recommendation).delete()
     db.query(models.Rating).delete()
     db.query(models.Movie).delete()
     db.query(models.User).delete()
     db.commit()
-    print("✅ Tables vidées avec succès")
+    print("[OK] Tables videes avec succes")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Importe les données MovieLens dans la base de données"
+        description="Importe les donnees MovieLens dans la base de donnees"
     )
     # Chemin par defaut : data/ml-latest-small/ a cote du dossier backend
     default_data_dir = os.path.join(
@@ -111,8 +131,8 @@ def main():
     )
     args = parser.parse_args()
 
-    # Création des tables si elles n'existent pas
-    print("[Setup] Création des tables...")
+    # Creation des tables si elles n'existent pas
+    print("[Setup] Creation des tables...")
     models.Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
@@ -121,10 +141,10 @@ def main():
             clear_tables(db)
 
         movies_count = bulk_import_movies(db, args.movies)
-        print(f"✅ {movies_count} films importés avec succès")
+        print(f"[OK] {movies_count} films importes avec succes")
 
         ratings_count = import_ratings(db, args.ratings)
-        print(f"✅ {ratings_count} évaluations importées avec succès")
+        print(f"[OK] {ratings_count} evaluations importees avec succes")
 
         total_movies = db.query(models.Movie).count()
         total_ratings = db.query(models.Rating).count()
@@ -132,7 +152,7 @@ def main():
 
         print("\n[Stats] Statistiques finales :")
         print(f"   Films : {total_movies}")
-        print(f"   Évaluations : {total_ratings}")
+        print(f"   Evaluations : {total_ratings}")
         print(f"   Utilisateurs : {total_users}")
 
     finally:
