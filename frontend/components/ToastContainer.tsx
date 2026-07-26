@@ -1,12 +1,13 @@
 "use client";
 
 import { useToast, ToastType } from "@/context/ToastContext";
+import { Check, X, Info, AlertTriangle } from "lucide-react";
 
-const iconMap: Record<ToastType, string> = {
-  success: "✓",
-  error: "✕",
-  info: "i",
-  warning: "!",
+const iconMap: Record<ToastType, React.ReactNode> = {
+  success: <Check className="w-4 h-4" />,
+  error: <X className="w-4 h-4" />,
+  info: <Info className="w-4 h-4" />,
+  warning: <AlertTriangle className="w-4 h-4" />,
 };
 
 const colorMap: Record<ToastType, string> = {
@@ -14,13 +15,6 @@ const colorMap: Record<ToastType, string> = {
   error: "from-red-500 to-rose-600",
   info: "from-blue-500 to-indigo-600",
   warning: "from-yellow-500 to-amber-600",
-};
-
-const bgMap: Record<ToastType, string> = {
-  success: "border-emerald-500/30",
-  error: "border-red-500/30",
-  info: "border-blue-500/30",
-  warning: "border-yellow-500/30",
 };
 
 export default function ToastContainer() {
@@ -39,7 +33,7 @@ export default function ToastContainer() {
           role="alert"
         >
           {/* Icon badge */}
-          <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${colorMap[toast.type]} flex items-center justify-center shrink-0 text-white text-sm font-bold`}>
+          <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${colorMap[toast.type]} flex items-center justify-center shrink-0 text-white`}>
             {iconMap[toast.type]}
           </div>
 
@@ -54,9 +48,7 @@ export default function ToastContainer() {
             className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors p-1"
             aria-label="Fermer"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-4 h-4" />
           </button>
         </div>
       ))}

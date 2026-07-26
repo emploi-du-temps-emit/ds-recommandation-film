@@ -140,14 +140,23 @@ def create_rating(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(require_user),
 ):
-    """Ajoute ou met à jour une évaluation de film (authentification requise)"""
+    """Ajoute ou met à jour ou supprime une évaluation de film (authentification requise)"""
+    # Forcer l'ID utilisateur depuis le token JWT (protection anti-falsification)
+    rating.user_id = current_user.id
+
+    if rating.rating == 0:
+        # Note a 0 = suppression de l'evaluation
+        deleted = crud.delete_rating(db, current_user.id, rating.movie_id)
+        if not deleted:
+            raise HTTPException(
+                status_code=404, detail="Aucune note trouvée pour ce film"
+            )
+        return deleted
+
     if rating.rating < 0.5 or rating.rating > 5.0:
         raise HTTPException(
             status_code=400, detail="La note doit être entre 0.5 et 5.0"
         )
-
-    # Forcer l'ID utilisateur depuis le token JWT
-    rating.user_id = current_user.id
 
     return crud.create_rating(db, rating)
 

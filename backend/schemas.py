@@ -35,7 +35,7 @@ class RatingCreate(BaseModel):
     user_id: int = Field(..., description="ID de l'utilisateur")
     movie_id: int = Field(..., description="ID du film")
     rating: float = Field(
-        ..., ge=0.5, le=5.0, description="Note entre 0.5 et 5.0"
+        ..., ge=0, le=5.0, description="Note entre 0 (suppression) et 5.0"
     )
 
 

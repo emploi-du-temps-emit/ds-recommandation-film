@@ -158,6 +158,24 @@ def get_movie_ratings(
     )
 
 
+def delete_rating(
+    db: Session, user_id: int, movie_id: int
+) -> Optional[models.Rating]:
+    """Supprime l'évaluation d'un utilisateur pour un film"""
+    existing = (
+        db.query(models.Rating)
+        .filter(
+            models.Rating.user_id == user_id,
+            models.Rating.movie_id == movie_id,
+        )
+        .first()
+    )
+    if existing:
+        db.delete(existing)
+        db.commit()
+    return existing
+
+
 # ==================== Stats ====================
 
 def get_dataset_stats(db: Session) -> dict:

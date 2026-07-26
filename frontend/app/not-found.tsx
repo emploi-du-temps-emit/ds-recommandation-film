@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HelpCircle } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -6,8 +7,8 @@ export default function NotFound() {
       <div className="text-center space-y-8 animate-fade-in-up max-w-lg">
         {/* Animated icon */}
         <div className="relative mx-auto w-32 h-32">
-          <div className="w-32 h-32 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-3xl flex items-center justify-center text-5xl font-bold text-white/30 mx-auto relative z-10 backdrop-blur-sm">
-            ?
+          <div className="w-32 h-32 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-3xl flex items-center justify-center mx-auto relative z-10 backdrop-blur-sm">
+            <HelpCircle className="w-16 h-16 text-white/30" />
           </div>
           {/* Orbiting dots */}
           <div className="absolute inset-0 animate-spin" style={{ animationDuration: "8s" }}>

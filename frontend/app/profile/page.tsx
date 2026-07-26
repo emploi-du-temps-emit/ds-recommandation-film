@@ -6,6 +6,7 @@ import Link from "next/link";
 import RecommendationsList from "@/components/RecommendationsList";
 import { api, Movie, Rating } from "@/services/api";
 import { useToast } from "@/context/ToastContext";
+import { Check } from "lucide-react";
 import RatingStars from "@/components/RatingStars";
 
 export default function ProfilePage() {
@@ -137,13 +138,13 @@ export default function ProfilePage() {
           </div>
           <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
             <span className="text-2xl font-bold text-amber-400">
-              {userRatings.length >= 3 ? "✓" : userRatings.length}
+              {userRatings.length >= 3 ? <Check className="w-6 h-6 inline" /> : userRatings.length}
             </span>
             <p className="text-[var(--text-muted)] text-xs mt-1">/3 pour les recos</p>
           </div>
           <div className="bg-[var(--skeleton-bg)] rounded-xl p-4 text-center">
             <span className="text-2xl font-bold text-emerald-400">
-              {userRatings.length >= 3 ? "✓" : "—"}
+              {userRatings.length >= 3 ? <Check className="w-6 h-6 inline" /> : "—"}
             </span>
             <p className="text-[var(--text-muted)] text-xs mt-1">Recommandations</p>
           </div>

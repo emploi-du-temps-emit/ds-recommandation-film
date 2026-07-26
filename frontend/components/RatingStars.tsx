@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Star } from "lucide-react";
 
 interface RatingStarsProps {
   initialRating?: number;
@@ -21,10 +22,10 @@ export default function RatingStars({
   const [hover, setHover] = useState(0);
   const [animating, setAnimating] = useState<number | null>(null);
 
-  const sizeClasses = {
-    sm: "text-lg",
-    md: "text-2xl",
-    lg: "text-4xl",
+  const iconSizes = {
+    sm: 16,
+    md: 22,
+    lg: 30,
   };
 
   const handleClick = (value: number) => {
@@ -38,7 +39,7 @@ export default function RatingStars({
   };
 
   return (
-    <div className="flex items-center space-x-1">
+    <div className="flex items-center space-x-0.5">
       {[1, 2, 3, 4, 5].map((star) => {
         const filled = star <= (hover || rating);
         const isAnimating = animating === star;
@@ -48,16 +49,21 @@ export default function RatingStars({
             onClick={() => handleClick(star)}
             onMouseEnter={() => !readOnly && setHover(star)}
             onMouseLeave={() => !readOnly && setHover(0)}
-            className={`${sizeClasses[size]} transition-all duration-150 select-none ${
+            className={`transition-all duration-150 select-none ${
               !readOnly
                 ? "cursor-pointer hover:scale-125 active:scale-150"
                 : "cursor-default"
-            } ${filled ? "text-yellow-400 scale-110" : "text-[var(--text-muted)] opacity-40"}`}
+            } ${filled ? "scale-110" : "opacity-30"}`}
             disabled={readOnly}
             aria-label={`Noter ${star} étoile${star > 1 ? "s" : ""}`}
           >
-            <span className={isAnimating ? "animate-star-pop inline-block" : ""}>
-              {filled ? "★" : "☆"}
+            <span className={isAnimating ? "animate-star-pop inline-block" : "inline-block"}>
+              <Star
+                size={iconSizes[size]}
+                className={`transition-colors duration-150 ${
+                  filled ? "text-yellow-400 fill-yellow-400" : "text-[var(--text-muted)]"
+                }`}
+              />
             </span>
           </button>
         );
