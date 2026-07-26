@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
   description:
     "Découvrez des films personnalisés grâce à notre système de recommandation basé sur l'intelligence artificielle.",
   keywords: ["films", "recommandation", "machine learning", "cinéma", "IA"],
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -46,7 +51,7 @@ export default function RootLayout({
               <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
+                    <Image src="/favicon.svg" alt="MovieReco" width={24} height={24} unoptimized className="rounded-md" />
                     <span className="font-medium bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
                       MovieReco
                     </span>

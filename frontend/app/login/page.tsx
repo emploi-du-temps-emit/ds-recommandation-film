@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { api } from "@/services/api";
 import { useToast } from "@/context/ToastContext";
 
@@ -51,9 +52,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold text-white shadow-lg shadow-yellow-500/20 mb-4">
-            MR
-          </div>
+          <Image src="/favicon.svg" alt="MovieReco" width={64} height={64} unoptimized className="mx-auto mb-4 shadow-lg shadow-yellow-500/20 rounded-2xl" />
           <h1 className="text-3xl font-bold text-[var(--text-primary)]">Connexion</h1>
           <p className="text-[var(--text-secondary)] text-sm mt-1">
             Connectez-vous pour découvrir vos recommandations

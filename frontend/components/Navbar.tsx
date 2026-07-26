@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -61,14 +62,16 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-2 text-xl font-bold hover:opacity-80 transition-opacity group"
+            className="flex items-center hover:opacity-80 transition-opacity group"
           >
-            <div className="w-9 h-9 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl flex items-center justify-center text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
-              MR
-            </div>
-            <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
-              MovieReco
-            </span>
+            <Image
+              src="/logo.svg"
+              alt="MovieReco"
+              width={140}
+              height={32}
+              className="group-hover:scale-105 transition-transform duration-300"
+              priority
+            />
           </Link>
 
           {/* Desktop navigation */}

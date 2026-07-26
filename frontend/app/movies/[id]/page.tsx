@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { api, Movie, MovieRecommendation } from "@/services/api";
+import Image from "next/image";
 import RatingStars from "@/components/RatingStars";
 import { useToast } from "@/context/ToastContext";
 
@@ -111,9 +112,7 @@ export default function MovieDetailPage() {
               background: `linear-gradient(135deg, hsla(${hue1}, 60%, 30%, 0.4), hsla(${hue2}, 60%, 40%, 0.3))`,
             }}
           >
-            <div className="w-28 h-28 bg-gradient-to-br from-yellow-500/30 to-amber-500/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
-              MR
-            </div>
+            <Image src="/favicon.svg" alt="MovieReco" width={96} height={96} unoptimized className="opacity-60" />
           </div>
 
           {/* Infos */}
