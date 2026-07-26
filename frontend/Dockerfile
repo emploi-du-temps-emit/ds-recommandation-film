@@ -1,25 +1,28 @@
 # Build stage
-FROM node:18-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
-# Installation des dépendances
+# Installation de toutes les dependances (prod + dev) pour le build
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Copie et build
 COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 
 WORKDIR /app
 
+# Copie de l'output du build
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
-COPY --from=build /app/package*.json ./
-COPY --from=build /app/node_modules ./node_modules
+
+# Installation des seules dependances de production
+COPY package*.json ./
+RUN npm ci --only=production
 
 EXPOSE 3000
 

@@ -85,24 +85,23 @@ def main():
     parser = argparse.ArgumentParser(
         description="Importe les données MovieLens dans la base de données"
     )
+    # Chemin par defaut : data/ml-latest-small/ a cote du dossier backend
+    default_data_dir = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)), "data", "ml-latest-small"
+    )
+    # Alternative si lance depuis Docker (volume monte dans /app/data)
+    docker_data_dir = os.path.join(os.path.dirname(__file__), "data", "ml-latest-small")
+    if not os.path.exists(default_data_dir) and os.path.exists(docker_data_dir):
+        default_data_dir = docker_data_dir
+
     parser.add_argument(
         "--movies",
-        default=os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
-            "data",
-            "ml-latest-small",
-            "movies.csv",
-        ),
+        default=os.path.join(default_data_dir, "movies.csv"),
         help="Chemin vers le fichier movies.csv",
     )
     parser.add_argument(
         "--ratings",
-        default=os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
-            "data",
-            "ml-latest-small",
-            "ratings.csv",
-        ),
+        default=os.path.join(default_data_dir, "ratings.csv"),
         help="Chemin vers le fichier ratings.csv",
     )
     parser.add_argument(
