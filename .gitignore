@@ -1,0 +1,70 @@
+# ============================================
+# .gitignore global - Movie Recommender System
+# ============================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# --- Jupyter Notebook ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*.nbdata
+
+# --- Data Science ---
+data/raw/
+data/external/
+data/interim/
+data/processed/
+
+# Dataset volumineux (MovieLens)
+data/ml-latest-small/ratings.csv
+data/ml-latest-small/movies.csv
+data/ml-latest-small/tags.csv
+data/ml-latest-small/links.csv
+*.zip
+
+# Modèles entraînés (peuvent être gros)
+models/*.pkl
+models/*.joblib
+!models/.gitkeep
+
+# --- Node / Frontend ---
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# --- IDE / Éditeurs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# --- Environnement ---
+.env
+.env.local
+.env.production
+.env.development
+
+# --- Docker ---
+.docker/
+
+# --- Fichiers temporaires ---
+*.log
+*.tmp
+*.temp
