@@ -41,12 +41,16 @@ app.add_middleware(
 )
 
 # Chargement du modèle IA
-MODEL_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)), "models", "recommendation_model.pkl"
-)
-MODEL_PATH_ALT = os.path.join(
-    os.path.dirname(__file__), "..", "models", "recommendation_model.pkl"
-)
+# Plusieurs chemins possibles selon le contexte (local vs Docker)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATHS = [
+    # Docker : volume monte ./models:/app/models
+    os.path.join(SCRIPT_DIR, "models", "recommendation_model.pkl"),
+    # Local : backend/../models/
+    os.path.join(SCRIPT_DIR, "..", "models", "recommendation_model.pkl"),
+    # Local : models/ (depuis la racine)
+    os.path.join("models", "recommendation_model.pkl"),
+]
 
 
 # Initialisation du recommender (sera chargé à la demande)
@@ -57,11 +61,11 @@ def get_recommender():
     """Charge le modèle IA (lazy loading)"""
     global recommender
     if recommender is None:
-        path = MODEL_PATH if os.path.exists(MODEL_PATH) else MODEL_PATH_ALT
-        if os.path.exists(path):
-            recommender = joblib.load(path)
-        else:
-            recommender = None
+        for path in MODEL_PATHS:
+            abs_path = os.path.abspath(path)
+            if os.path.exists(abs_path):
+                recommender = joblib.load(abs_path)
+                break
     return recommender
 
 
