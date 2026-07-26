@@ -54,7 +54,7 @@ class MovieRecommender:
             ratings_df: DataFrame avec colonnes [userId, movieId, rating]
             movies_df: DataFrame avec colonnes [movieId, title, genres]
         """
-        print("📦 Création de la matrice utilisateur-film...")
+        print("[Data] Création de la matrice utilisateur-film...")
 
         # Créer la matrice pivot
         self.user_movie_matrix = ratings_df.pivot_table(
@@ -70,7 +70,7 @@ class MovieRecommender:
             f"utilisateurs × {self.user_movie_matrix.shape[1]} films"
         )
 
-        print("🔗 Calcul de la matrice de similarité...")
+        print("[Similarity] Calcul de la matrice de similarité...")
 
         # Conversion en matrice sparse pour le calcul
         sparse_matrix = csr_matrix(self.user_movie_matrix.values)

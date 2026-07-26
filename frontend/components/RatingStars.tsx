@@ -50,7 +50,7 @@ export default function RatingStars({
             disabled={readOnly}
             aria-label={`Noter ${star} étoile${star > 1 ? "s" : ""}`}
           >
-            {filled ? "⭐" : "☆"}
+            {filled ? "★" : "☆"}
           </button>
         );
       })}

@@ -42,7 +42,7 @@ export default function RecommendationsList() {
   if (loading) {
     return (
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">🎯 Pour vous</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Pour vous</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="h-64 bg-white/5 rounded-xl animate-pulse" />
@@ -55,7 +55,7 @@ export default function RecommendationsList() {
   if (error) {
     return (
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">🎯 Pour vous</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Pour vous</h2>
         <div className="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-4 text-center">
           <p className="text-yellow-400 text-sm">{error}</p>
         </div>
@@ -68,7 +68,7 @@ export default function RecommendationsList() {
   return (
     <section>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-white">🎯 Recommandé pour vous</h2>
+        <h2 className="text-3xl font-bold text-white">Recommandé pour vous</h2>
         <span className="text-sm text-gray-500">
           Basé sur vos évaluations
         </span>

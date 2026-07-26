@@ -80,7 +80,7 @@ def get_db():
 def read_root():
     """Page d'accueil de l'API"""
     return {
-        "message": "🎬 API de recommandation de films",
+        "message": "API de recommandation de films",
         "version": "1.0.0",
         "status": "online",
         "endpoints": {

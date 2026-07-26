@@ -33,10 +33,10 @@ def import_ratings(db, ratings_path: str, batch_size: int = 1000) -> int:
     seules les évaluations faites via l'API sont utilisées.
     """
     if not os.path.exists(ratings_path):
-        print(f"⚠️  Fichier non trouvé : {ratings_path}")
+        print(f"[Warning] Fichier non trouvé : {ratings_path}")
         return 0
 
-    print(f"📥 Import des évaluations depuis {ratings_path}...")
+    print(f"[Import] Import des évaluations depuis {ratings_path}...")
     df = pd.read_csv(ratings_path)
     print(f"   {len(df)} évaluations trouvées dans le CSV")
 
@@ -72,7 +72,7 @@ def import_ratings(db, ratings_path: str, batch_size: int = 1000) -> int:
 
 def clear_tables(db):
     """Vide les tables de la base de données."""
-    print("🗑️  Suppression des données existantes...")
+    print("[Delete] Suppression des données existantes...")
     db.query(models.Recommendation).delete()
     db.query(models.Rating).delete()
     db.query(models.Movie).delete()
@@ -113,7 +113,7 @@ def main():
     args = parser.parse_args()
 
     # Création des tables si elles n'existent pas
-    print("🏗️  Création des tables...")
+    print("[Setup] Création des tables...")
     models.Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
@@ -131,7 +131,7 @@ def main():
         total_ratings = db.query(models.Rating).count()
         total_users = db.query(models.User).count()
 
-        print("\n📊 Statistiques finales :")
+        print("\n[Stats] Statistiques finales :")
         print(f"   Films : {total_movies}")
         print(f"   Évaluations : {total_ratings}")
         print(f"   Utilisateurs : {total_users}")
