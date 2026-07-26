@@ -37,7 +37,7 @@ export default function LoginPage() {
     <div className="min-h-[80vh] flex items-center justify-center">
       <div className="w-full max-w-md bg-white/5 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/10">
         <div className="text-center mb-8">
-          <span className="text-4xl">🎬</span>
+          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold text-white">MR</div>
           <h1 className="text-2xl font-bold text-white mt-2">Connexion</h1>
           <p className="text-gray-400 text-sm">
             Connectez-vous pour découvrir vos recommandations

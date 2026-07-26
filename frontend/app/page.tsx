@@ -71,7 +71,7 @@ export default function Home() {
     }
     try {
       await api.rateMovie(parseInt(userId), movieId, rating);
-      setToastMessage(`Film noté ${rating}/5 ⭐`);
+      setToastMessage(`Film noté ${rating}/5`);
     } catch {
       setToastMessage("Erreur lors de la notation");
     }
@@ -105,7 +105,7 @@ export default function Home() {
       {/* Films */}
       <section className="animate-fade-in-up animate-delay-200">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-white">🎬 Catalogue</h2>
+          <h2 className="text-3xl font-bold text-white">Catalogue</h2>
           {!loading && !error && (
             <span className="text-sm text-gray-500">
               {movies.length} films
@@ -126,7 +126,7 @@ export default function Home() {
 
         {error && (
           <div className="bg-red-900/30 border border-red-700/50 rounded-xl p-6 text-center">
-            <p className="text-red-400 text-lg mb-2">⚠️ {error}</p>
+            <p className="text-red-400 text-lg mb-2">{error}</p>
             <p className="text-gray-500 text-sm">
               Lancez d&apos;abord le backend avec{" "}
               <code className="bg-gray-800 px-2 py-1 rounded text-purple-400">
@@ -182,19 +182,19 @@ export default function Home() {
 
       {/* Section explicative */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 animate-fade-in-up animate-delay-300">
-        {[
+        {        [
           {
-            emoji: "⭐",
+            emoji: "★",
             title: "Notez des films",
             desc: "Donnez votre avis sur les films que vous avez vus.",
           },
           {
-            emoji: "🧠",
+            emoji: "◆",
             title: "L'IA analyse vos goûts",
             desc: "Notre algorithme compare vos notes à celles d'autres utilisateurs.",
           },
           {
-            emoji: "🎯",
+            emoji: "▶",
             title: "Recommandations personnalisées",
             desc: "Recevez des suggestions de films adaptées à vos préférences.",
           },

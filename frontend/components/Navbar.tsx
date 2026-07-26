@@ -93,7 +93,7 @@ export default function Navbar() {
             href="/"
             className="flex items-center space-x-2 text-xl font-bold hover:opacity-80 transition-opacity"
           >
-            <span className="text-2xl">🎬</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-xs font-bold text-white">MR</div>
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               MovieReco
             </span>

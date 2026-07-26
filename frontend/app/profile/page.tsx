@@ -38,7 +38,7 @@ export default function ProfilePage() {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">
-                Bienvenue, {username} 👋
+                Bienvenue, {username}
               </h1>
               <p className="text-gray-400 text-sm">
                 Notez des films pour obtenir des recommandations personnalisées
@@ -58,15 +58,15 @@ export default function ProfilePage() {
         {/* Quick tips */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
           <div className="bg-white/5 rounded-lg p-4 text-center">
-            <span className="text-2xl">⭐</span>
+            <span className="text-2xl text-yellow-400">★</span>
             <p className="text-gray-300 text-sm mt-1">Notez 3+ films</p>
           </div>
           <div className="bg-white/5 rounded-lg p-4 text-center">
-            <span className="text-2xl">🧠</span>
+            <span className="text-2xl text-purple-400">◆</span>
             <p className="text-gray-300 text-sm mt-1">L&apos;IA analyse</p>
           </div>
           <div className="bg-white/5 rounded-lg p-4 text-center">
-            <span className="text-2xl">🎯</span>
+            <span className="text-2xl text-pink-400">▶</span>
             <p className="text-gray-300 text-sm mt-1">Recommandations</p>
           </div>
         </div>

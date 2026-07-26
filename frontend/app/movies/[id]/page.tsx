@@ -74,7 +74,7 @@ export default function MovieDetailPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
-          <span className="text-6xl">🎬</span>
+          <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-white mx-auto">MR</div>
           <h1 className="text-2xl font-bold text-white mt-4 mb-2">Film non trouvé</h1>
           <p className="text-gray-400 mb-6">{error}</p>
           <button
@@ -107,7 +107,7 @@ export default function MovieDetailPage() {
         <div className="md:flex">
           {/* Poster */}
           <div className="md:w-80 h-80 md:h-auto bg-gradient-to-br from-purple-600/30 via-blue-500/20 to-pink-500/30 flex items-center justify-center shrink-0">
-            <span className="text-8xl">🎬</span>
+            <div className="w-24 h-24 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center text-3xl font-bold text-white/50 mx-auto">MR</div>
           </div>
 
           {/* Infos */}
@@ -175,7 +175,7 @@ export default function MovieDetailPage() {
       {recommendations.length > 0 && (
         <section>
           <h2 className="text-2xl font-bold text-white mb-6">
-            🎯 Films similaires
+            Films similaires
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {recommendations.map((rec, index) => (
@@ -211,7 +211,7 @@ function MovieCardSimple({ movie }: { movie: Movie }) {
       onClick={() => router.push(`/movies/${movie.id}`)}
     >
       <div className="h-32 bg-gradient-to-br from-purple-600/30 to-pink-500/30 flex items-center justify-center">
-        <span className="text-4xl">🎬</span>
+        <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-lg font-bold text-white">MR</div>
       </div>
       <div className="p-3">
         <p className="text-white text-sm font-medium truncate">{cleanTitle}</p>

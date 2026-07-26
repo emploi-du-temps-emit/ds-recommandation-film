@@ -54,12 +54,12 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
         <div className="h-48 bg-gradient-to-br from-purple-600/30 via-blue-500/20 to-pink-500/30 
                         flex items-center justify-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
-          <span className="text-6xl relative z-10 transition-transform duration-300 group-hover:scale-110">
-            🎬
-          </span>
+          <div className="w-16 h-16 bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-2xl flex items-center justify-center text-xl font-bold text-white/60 relative z-10 transition-transform duration-300 group-hover:scale-110">
+            MR
+          </div>
           {predictedRating && (
             <div className="absolute top-2 right-2 bg-yellow-400/90 text-gray-900 text-xs font-bold px-2 py-1 rounded-full z-10">
-              ⭐ {predictedRating.toFixed(1)}
+              ★ {predictedRating.toFixed(1)}
             </div>
           )}
         </div>
