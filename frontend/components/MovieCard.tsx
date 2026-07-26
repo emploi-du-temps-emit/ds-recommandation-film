@@ -1,10 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import { Movie } from "@/services/api";
+import RatingStars from "./RatingStars";
 
 interface MovieCardProps {
   movie: Movie;
   predictedRating?: number;
+  onRate?: (rating: number) => void;
+  userId?: number | null;
 }
 
 const genreColors: Record<string, string> = {
@@ -27,7 +32,9 @@ const genreColors: Record<string, string> = {
   Western: "bg-amber-600",
 };
 
-export default function MovieCard({ movie, predictedRating }: MovieCardProps) {
+export default function MovieCard({ movie, predictedRating, onRate, userId }: MovieCardProps) {
+  const [showRating, setShowRating] = useState(false);
+
   // Extraire l'année du titre
   const yearMatch = movie.title.match(/\((\d{4})\)/);
   const year = yearMatch ? yearMatch[1] : "";
@@ -36,25 +43,35 @@ export default function MovieCard({ movie, predictedRating }: MovieCardProps) {
   const genres = movie.genres.split("|");
 
   return (
-    <div className="group bg-white/5 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 cursor-pointer">
-      {/* Poster placeholder */}
-      <div className="h-48 bg-gradient-to-br from-purple-600/30 via-blue-500/20 to-pink-500/30 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
-        <span className="text-6xl relative z-10 transition-transform duration-300 group-hover:scale-110">
-          🎬
-        </span>
-        {predictedRating && (
-          <div className="absolute top-2 right-2 bg-yellow-400/90 text-gray-900 text-xs font-bold px-2 py-1 rounded-full z-10">
-            {predictedRating.toFixed(1)}
-          </div>
-        )}
-      </div>
+    <div
+      className="group bg-white/5 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg 
+                 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 
+                 hover:scale-[1.02] hover:bg-white/10"
+      onMouseEnter={() => setShowRating(true)}
+      onMouseLeave={() => setShowRating(false)}
+    >
+      <Link href={`/movies/${movie.id}`}>
+        <div className="h-48 bg-gradient-to-br from-purple-600/30 via-blue-500/20 to-pink-500/30 
+                        flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
+          <span className="text-6xl relative z-10 transition-transform duration-300 group-hover:scale-110">
+            🎬
+          </span>
+          {predictedRating && (
+            <div className="absolute top-2 right-2 bg-yellow-400/90 text-gray-900 text-xs font-bold px-2 py-1 rounded-full z-10">
+              ⭐ {predictedRating.toFixed(1)}
+            </div>
+          )}
+        </div>
+      </Link>
 
       {/* Contenu */}
       <div className="p-4">
-        <h3 className="text-white font-semibold text-base mb-1 group-hover:text-yellow-400 transition-colors truncate">
-          {cleanTitle}
-        </h3>
+        <Link href={`/movies/${movie.id}`}>
+          <h3 className="text-white font-semibold text-base mb-1 group-hover:text-yellow-400 transition-colors truncate">
+            {cleanTitle}
+          </h3>
+        </Link>
 
         <div className="flex items-center space-x-2 mb-3 text-xs text-gray-400">
           {year && <span>{year}</span>}
@@ -63,7 +80,7 @@ export default function MovieCard({ movie, predictedRating }: MovieCardProps) {
         </div>
 
         {/* Genres */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {genres.slice(0, 3).map((genre) => (
             <span
               key={genre}
@@ -80,6 +97,18 @@ export default function MovieCard({ movie, predictedRating }: MovieCardProps) {
             </span>
           )}
         </div>
+
+        {/* Notation rapide (visible au survol) */}
+        {onRate && (
+          <div className={`transition-all duration-300 ${showRating ? "opacity-100 max-h-12" : "opacity-0 max-h-0 overflow-hidden"}`}>
+            <div className="pt-2 border-t border-white/10">
+              <RatingStars
+                size="sm"
+                onRate={onRate}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

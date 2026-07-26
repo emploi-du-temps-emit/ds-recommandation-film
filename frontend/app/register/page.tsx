@@ -25,10 +25,15 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const res = await api.register(username, email, password);
-      localStorage.setItem("token", "authenticated");
-      localStorage.setItem("userId", String(res.id));
-      localStorage.setItem("username", res.username);
+      // 1. Créer le compte
+      const user = await api.register(username, email, password);
+
+      // 2. Auto-login avec JWT
+      const loginRes = await api.login(email, password);
+      localStorage.setItem("token", loginRes.access_token);
+      localStorage.setItem("userId", String(loginRes.user_id));
+      localStorage.setItem("username", loginRes.username);
+
       router.push("/");
     } catch (err: any) {
       setError(

@@ -27,6 +27,7 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-movie_recommender}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-in-production-docker}
     volumes:
       - ./models:/app/models
       - ./data:/app/data

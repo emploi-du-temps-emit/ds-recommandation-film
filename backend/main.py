@@ -4,10 +4,10 @@ Movie Recommender API - FastAPI Backend
 API de recommandation de films basée sur le Machine Learning.
 """
 
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 import joblib
 import os
 
@@ -15,6 +15,7 @@ from database import SessionLocal, engine
 import models
 import schemas
 import crud
+from auth import create_access_token, require_user
 
 # Création des tables dans la base de données
 models.Base.metadata.create_all(bind=engine)
@@ -43,6 +44,10 @@ app.add_middleware(
 MODEL_PATH = os.path.join(
     os.path.dirname(os.path.dirname(__file__)), "models", "recommendation_model.pkl"
 )
+MODEL_PATH_ALT = os.path.join(
+    os.path.dirname(__file__), "..", "models", "recommendation_model.pkl"
+)
+
 
 # Initialisation du recommender (sera chargé à la demande)
 recommender = None
@@ -52,8 +57,9 @@ def get_recommender():
     """Charge le modèle IA (lazy loading)"""
     global recommender
     if recommender is None:
-        if os.path.exists(MODEL_PATH):
-            recommender = joblib.load(MODEL_PATH)
+        path = MODEL_PATH if os.path.exists(MODEL_PATH) else MODEL_PATH_ALT
+        if os.path.exists(path):
+            recommender = joblib.load(path)
         else:
             recommender = None
     return recommender
@@ -80,11 +86,12 @@ def read_root():
         "endpoints": {
             "GET  /": "Cette page",
             "GET  /movies": "Liste des films (paginated)",
+            "GET  /movies/search": "Recherche de films par titre",
             "GET  /movies/{id}": "Détail d'un film",
-            "POST /ratings": "Noter un film",
+            "POST /ratings": "Noter un film (authentifié)",
             "GET  /recommendations/{user_id}": "Recommandations personnalisées",
             "POST /users": "Créer un utilisateur",
-            "POST /login": "Connexion",
+            "POST /login": "Connexion (retourne un token JWT)",
             "GET  /stats": "Statistiques du dataset",
         },
     }
@@ -92,10 +99,23 @@ def read_root():
 
 @app.get("/movies", response_model=List[schemas.Movie])
 def get_movies(
-    skip: int = 0, limit: int = 20, db: Session = Depends(get_db)
+    skip: int = Query(0, ge=0, description="Nombre de films à sauter"),
+    limit: int = Query(20, ge=1, le=100, description="Nombre de films à retourner"),
+    db: Session = Depends(get_db),
 ):
     """Récupère la liste des films avec pagination"""
     movies = crud.get_movies(db, skip=skip, limit=limit)
+    return movies
+
+
+@app.get("/movies/search", response_model=List[schemas.Movie])
+def search_movies(
+    q: str = Query(..., min_length=1, description="Terme de recherche"),
+    limit: int = Query(10, ge=1, le=50, description="Nombre maximum de résultats"),
+    db: Session = Depends(get_db),
+):
+    """Recherche des films par titre (insensible à la casse)"""
+    movies = crud.search_movies(db, query=q, limit=limit)
     return movies
 
 
@@ -111,21 +131,31 @@ def get_movie(movie_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/ratings", response_model=schemas.Rating)
-def create_rating(rating: schemas.RatingCreate, db: Session = Depends(get_db)):
-    """Ajoute ou met à jour une évaluation de film"""
+def create_rating(
+    rating: schemas.RatingCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(require_user),
+):
+    """Ajoute ou met à jour une évaluation de film (authentification requise)"""
     if rating.rating < 0.5 or rating.rating > 5.0:
         raise HTTPException(
             status_code=400, detail="La note doit être entre 0.5 et 5.0"
         )
+
+    # Forcer l'ID utilisateur depuis le token JWT
+    rating.user_id = current_user.id
+
     return crud.create_rating(db, rating)
 
 
 @app.get(
-    "/recommendations/{user_id}",
+    "/recommendations",
     response_model=List[schemas.MovieRecommendation],
 )
 def get_recommendations(
-    user_id: int, n: int = 5, db: Session = Depends(get_db)
+    n: int = Query(5, ge=1, le=20, description="Nombre de recommandations"),
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(require_user),
 ):
     """Génère des recommandations personnalisées pour un utilisateur"""
     recommender_model = get_recommender()
@@ -138,7 +168,7 @@ def get_recommendations(
         )
 
     # Récupérer les notes de l'utilisateur depuis la BDD
-    user_ratings = crud.get_user_ratings(db, user_id)
+    user_ratings = crud.get_user_ratings(db, current_user.id)
 
     if len(user_ratings) < 3:
         raise HTTPException(
@@ -148,7 +178,7 @@ def get_recommendations(
         )
 
     # Générer les recommandations avec le modèle IA
-    recommendations = recommender_model.recommend(user_id, n_recommendations=n)
+    recommendations = recommender_model.recommend(current_user.id, n_recommendations=n)
 
     # Enrichir avec les informations de la BDD
     result = []
@@ -182,14 +212,20 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 def login(
     credentials: schemas.LoginRequest, db: Session = Depends(get_db)
 ):
-    """Authentifie un utilisateur et retourne son ID"""
+    """Authentifie un utilisateur et retourne un token JWT"""
     user = crud.authenticate_user(db, credentials.email, credentials.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Email ou mot de passe incorrect",
         )
+
+    # Génération du token JWT
+    token = create_access_token(data={"sub": str(user.id)})
+
     return {
+        "access_token": token,
+        "token_type": "bearer",
         "user_id": user.id,
         "username": user.username,
         "message": "Connexion réussie",
@@ -200,3 +236,14 @@ def login(
 def get_stats(db: Session = Depends(get_db)):
     """Retourne les statistiques du dataset"""
     return crud.get_dataset_stats(db)
+
+
+@app.get("/health")
+def health_check():
+    """Endpoint de health check pour le monitoring"""
+    recommender_ok = get_recommender() is not None
+    return {
+        "status": "healthy",
+        "model_loaded": recommender_ok,
+        "database": "connected",
+    }

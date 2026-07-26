@@ -32,6 +32,14 @@ export interface User {
   email: string;
 }
 
+export interface LoginResponse {
+  access_token: string;
+  token_type: string;
+  user_id: number;
+  username: string;
+  message: string;
+}
+
 // Client Axios
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -43,7 +51,7 @@ const client = axios.create({
   timeout: 10000,
 });
 
-// Intercepteur pour ajouter le token d'auth
+// Intercepteur pour ajouter le token JWT d'auth
 client.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("token");
@@ -62,6 +70,7 @@ client.interceptors.response.use(
       if (typeof window !== "undefined") {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        localStorage.removeItem("username");
       }
     }
     return Promise.reject(error);
@@ -70,12 +79,16 @@ client.interceptors.response.use(
 
 export const api = {
   // === Authentification ===
-  login: async (email: string, password: string) => {
+  login: async (email: string, password: string): Promise<LoginResponse> => {
     const res = await client.post("/login", { email, password });
     return res.data;
   },
 
-  register: async (username: string, email: string, password: string) => {
+  register: async (
+    username: string,
+    email: string,
+    password: string
+  ): Promise<User> => {
     const res = await client.post("/users", { username, email, password });
     return res.data;
   },
@@ -92,15 +105,18 @@ export const api = {
   },
 
   searchMovies: async (query: string): Promise<Movie[]> => {
-    const res = await client.get(`/movies?skip=0&limit=10`);
-    // Note: à améliorer avec une vraie route de recherche
-    return res.data.filter((m: Movie) =>
-      m.title.toLowerCase().includes(query.toLowerCase())
+    const res = await client.get(
+      `/movies/search?q=${encodeURIComponent(query)}&limit=10`
     );
+    return res.data;
   },
 
   // === Évaluations ===
-  rateMovie: async (userId: number, movieId: number, rating: number) => {
+  rateMovie: async (
+    userId: number,
+    movieId: number,
+    rating: number
+  ): Promise<Rating> => {
     const res = await client.post("/ratings", {
       user_id: userId,
       movie_id: movieId,
@@ -114,7 +130,7 @@ export const api = {
     userId: number,
     n = 5
   ): Promise<MovieRecommendation[]> => {
-    const res = await client.get(`/recommendations/${userId}?n=${n}`);
+    const res = await client.get(`/recommendations?n=${n}`);
     return res.data;
   },
 

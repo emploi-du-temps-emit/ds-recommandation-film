@@ -19,7 +19,8 @@ export default function LoginPage() {
 
     try {
       const res = await api.login(email, password);
-      localStorage.setItem("token", "authenticated");
+      // Stocker le token JWT et les infos utilisateur
+      localStorage.setItem("token", res.access_token);
       localStorage.setItem("userId", String(res.user_id));
       localStorage.setItem("username", res.username);
       router.push("/");
