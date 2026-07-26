@@ -20,7 +20,7 @@ const genreColors: Record<string, string> = {
   Comedy: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
   Crime: "bg-gray-500/20 text-gray-400 border-gray-500/30",
   Documentary: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-  Drama: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+  Drama: "bg-amber-500/20 text-amber-400 border-amber-500/30",
   Fantasy: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
   Horror: "bg-gray-700/30 text-gray-300 border-gray-600/30",
   Musical: "bg-pink-500/20 text-pink-400 border-pink-500/30",
@@ -57,7 +57,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
       className={`group bg-[var(--card-bg)] backdrop-blur-lg rounded-xl overflow-hidden 
                   shadow-lg border border-[var(--card-border)]
                   transition-all duration-300 
-                  ${isHovered ? "shadow-2xl shadow-purple-500/10 scale-[1.03] bg-[var(--card-hover)]" : "shadow-lg"}`}
+                  ${isHovered ? "shadow-2xl shadow-yellow-500/10 scale-[1.03] bg-[var(--card-hover)]" : "shadow-lg"}`}
       onMouseEnter={() => { setShowRating(true); setIsHovered(true); }}
       onMouseLeave={() => { setShowRating(false); setIsHovered(false); }}
     >
@@ -75,7 +75,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
           
           {/* Floating badge on hover */}
           {isHovered && (
-            <div className="absolute top-3 left-3 bg-purple-500/80 text-white text-[10px] font-medium px-2 py-1 rounded-md animate-scale-in z-10">
+            <div className="absolute top-3 left-3 bg-yellow-500/80 text-white text-[10px] font-medium px-2 py-1 rounded-md animate-scale-in z-10">
               Voir détails
             </div>
           )}
@@ -83,7 +83,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
           {/* Icon */}
           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold 
                           text-white/50 relative z-10 transition-all duration-500 
-                          ${isHovered ? "scale-110 rotate-3 bg-gradient-to-br from-purple-500/50 to-pink-500/50" : "bg-gradient-to-br from-purple-500/30 to-pink-500/30"}`}
+                          ${isHovered ? "scale-110 rotate-3 bg-gradient-to-br from-yellow-500/50 to-amber-500/50" : "bg-gradient-to-br from-yellow-500/30 to-amber-500/30"}`}
           >
             MR
           </div>
@@ -101,7 +101,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
       <div className="p-4">
         <Link href={`/movies/${movie.id}`}>
           <h3 className="text-[var(--text-primary)] font-semibold text-sm mb-1 
-                         group-hover:text-purple-400 transition-colors duration-200
+                         group-hover:text-yellow-400 transition-colors duration-200
                          line-clamp-2 leading-snug min-h-[2.5em]">
             {cleanTitle}
           </h3>

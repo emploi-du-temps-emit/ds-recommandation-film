@@ -86,7 +86,7 @@ export default function RecommendationsList() {
         <h2 className="text-2xl font-bold text-[var(--text-primary)]">
           Recommandé pour vous
         </h2>
-        <span className="text-xs text-[var(--text-muted)] bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">
+        <span className="text-xs text-[var(--text-muted)] bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-full">
           IA • Prédictions personnalisées
         </span>
       </div>

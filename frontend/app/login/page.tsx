@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold text-white shadow-lg shadow-purple-500/20 mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold text-white shadow-lg shadow-yellow-500/20 mb-4">
             MR
           </div>
           <h1 className="text-3xl font-bold text-[var(--text-primary)]">Connexion</h1>
@@ -147,10 +147,10 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 
+              className="w-full py-3.5 bg-gradient-to-r from-yellow-600 to-amber-700 
                          text-white rounded-xl font-medium hover:opacity-90 
                          transition-all duration-200 disabled:opacity-50
-                         hover:shadow-lg hover:shadow-purple-500/25
+                         hover:shadow-lg hover:shadow-yellow-500/25
                          active:scale-[0.98]"
             >
               {loading ? (
@@ -169,7 +169,7 @@ export default function LoginPage() {
           Pas encore de compte ?{" "}
           <Link
             href="/register"
-            className="text-purple-400 hover:text-purple-300 underline font-medium transition-colors"
+            className="text-yellow-400 hover:text-yellow-300 underline font-medium transition-colors"
           >
             S&apos;inscrire
           </Link>

@@ -21,10 +21,10 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-xl 
-                 bg-gradient-to-br from-purple-600 to-pink-600 
-                 text-white shadow-lg shadow-purple-500/25
+                 bg-gradient-to-br from-yellow-500 to-amber-600 
+                 text-white shadow-lg shadow-yellow-500/25
                  flex items-center justify-center
-                 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-purple-500/40
+                 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/40
                  ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
       aria-label="Retour en haut"
     >

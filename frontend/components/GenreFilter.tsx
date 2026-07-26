@@ -87,8 +87,8 @@ export default function GenreFilter({ selected, onSelect, movieCount }: GenreFil
             className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium 
                        transition-all duration-200 border ${
               selected === genre
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white border-transparent shadow-lg shadow-purple-500/20"
-                : "bg-[var(--card-bg)] text-[var(--text-secondary)] border-[var(--card-border)] hover:border-purple-500/30 hover:text-[var(--text-primary)]"
+                ? "bg-gradient-to-r from-yellow-600 to-amber-700 text-black border-transparent shadow-lg shadow-yellow-500/20"
+                : "bg-[var(--card-bg)] text-[var(--text-secondary)] border-[var(--card-border)] hover:border-yellow-500/30 hover:text-[var(--text-primary)]"
             }`}
           >
             {genre}

@@ -63,10 +63,10 @@ export default function Navbar() {
             href="/"
             className="flex items-center space-x-2 text-xl font-bold hover:opacity-80 transition-opacity group"
           >
-            <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
+            <div className="w-9 h-9 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl flex items-center justify-center text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
               MR
             </div>
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
               MovieReco
             </span>
           </Link>
@@ -77,7 +77,7 @@ export default function Navbar() {
               href="/"
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isActive("/")
-                  ? "bg-purple-500/15 text-purple-400"
+                  ? "bg-yellow-500/15 text-yellow-400"
                   : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
               }`}
             >
@@ -90,7 +90,7 @@ export default function Navbar() {
                   href="/profile"
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive("/profile")
-                      ? "bg-purple-500/15 text-purple-400"
+                      ? "bg-yellow-500/15 text-yellow-400"
                       : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
                   }`}
                 >
@@ -98,7 +98,7 @@ export default function Navbar() {
                 </Link>
 
                 <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-[var(--card-border)]">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                  <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center text-xs font-bold text-white">
                     {username ? username.charAt(0).toUpperCase() : "?"}
                   </div>
                   <button
@@ -119,9 +119,9 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-600 
+                  className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-yellow-600 to-amber-700 
                              text-white rounded-lg hover:opacity-90 transition-all duration-200
-                             hover:shadow-lg hover:shadow-purple-500/25"
+                             hover:shadow-lg hover:shadow-yellow-500/25"
                 >
                   S&apos;inscrire
                 </Link>
@@ -191,7 +191,7 @@ export default function Navbar() {
                 href="/"
                 className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive("/")
-                    ? "bg-purple-500/15 text-purple-400"
+                    ? "bg-yellow-500/15 text-yellow-400"
                     : "text-[var(--text-secondary)]"
                 }`}
               >
@@ -204,14 +204,14 @@ export default function Navbar() {
                     href="/profile"
                     className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                       isActive("/profile")
-                        ? "bg-purple-500/15 text-purple-400"
+                        ? "bg-yellow-500/15 text-yellow-400"
                         : "text-[var(--text-secondary)]"
                     }`}
                   >
                     Mon profil
                   </Link>
                   <div className="flex items-center space-x-3 px-4 py-3 mt-2 border-t border-[var(--card-border)]">
-                    <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                    <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center text-xs font-bold text-white">
                       {username ? username.charAt(0).toUpperCase() : "?"}
                     </div>
                     <span className="text-sm text-[var(--text-primary)] flex-1">{username}</span>
@@ -233,7 +233,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/register"
-                    className="w-full text-center px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:opacity-90 transition-all"
+                    className="w-full text-center px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-yellow-600 to-amber-700 text-white rounded-lg hover:opacity-90 transition-all"
                   >
                     S&apos;inscrire
                   </Link>

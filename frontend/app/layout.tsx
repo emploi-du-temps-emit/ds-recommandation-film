@@ -46,8 +46,8 @@ export default function RootLayout({
               <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
-                    <span className="font-medium bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <div className="w-6 h-6 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
+                    <span className="font-medium bg-gradient-to-r from-yellow-400 to-amber-500 bg-clip-text text-transparent">
                       MovieReco
                     </span>
                   </div>

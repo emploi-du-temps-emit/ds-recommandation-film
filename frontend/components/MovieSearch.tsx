@@ -170,7 +170,7 @@ export default function MovieSearch() {
                              border-b border-[var(--card-border)] last:border-0
                              transition-all duration-150 ${
                     isSelected
-                      ? "bg-purple-500/10"
+                      ? "bg-yellow-500/10"
                       : "hover:bg-white/5"
                   }`}
                   onClick={() => navigateToMovie(movie)}
@@ -179,14 +179,14 @@ export default function MovieSearch() {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center 
                                   text-xs font-bold shrink-0 transition-all duration-300 ${
                     isSelected
-                      ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white scale-110"
-                      : "bg-gradient-to-br from-purple-500/30 to-pink-500/30 text-white/60"
+                      ? "bg-gradient-to-br from-yellow-500 to-amber-600 text-white scale-110"
+                      : "bg-gradient-to-br from-yellow-500/30 to-amber-500/30 text-white/60"
                   }`}>
                     {cleanTitle.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className={`text-sm font-medium truncate ${
-                      isSelected ? "text-purple-400" : "text-[var(--text-primary)]"
+                      isSelected ? "text-yellow-400" : "text-[var(--text-primary)]"
                     }`}>
                       {cleanTitle}
                     </p>
@@ -196,7 +196,7 @@ export default function MovieSearch() {
                     </p>
                   </div>
                   {isSelected && (
-                    <svg className="w-4 h-4 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-yellow-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   )}

@@ -102,19 +102,19 @@ export default function Home() {
       <section className="relative text-center py-16 md:py-20 overflow-hidden animate-fade-in-up">
         {/* Background effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute -top-40 -left-40 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
         </div>
 
         <div className="relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in-down">
-            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-            <span className="text-xs text-purple-400 font-medium">
+          <div className="inline-flex items-center space-x-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in-down">
+            <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+            <span className="text-xs text-yellow-400 font-medium">
               Système de recommandation intelligent
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
             MovieReco
           </h1>
           <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
@@ -199,7 +199,7 @@ export default function Home() {
             <p className="text-red-400 text-lg mb-2">{error}</p>
             <p className="text-gray-500 text-sm">
               Lancez d&apos;abord le backend avec{" "}
-              <code className="bg-gray-800 px-2 py-1 rounded text-purple-400">
+              <code className="bg-gray-800 px-2 py-1 rounded text-yellow-400">
                 cd backend && uvicorn main:app --reload
               </code>
             </p>
@@ -210,7 +210,7 @@ export default function Home() {
           <>
             {filteredMovies.length === 0 ? (
               <div className="text-center py-16 animate-fade-in">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-20 h-20 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <svg className="w-10 h-10 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -241,10 +241,10 @@ export default function Home() {
                 <button
                   onClick={loadMore}
                   disabled={loadingMore}
-                  className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 
+                  className="px-8 py-3 bg-gradient-to-r from-yellow-600 to-amber-700 
                              text-white rounded-xl font-medium hover:opacity-90 
                              transition-all duration-200 disabled:opacity-50
-                             hover:shadow-lg hover:shadow-purple-500/25
+                             hover:shadow-lg hover:shadow-yellow-500/25
                              active:scale-95"
                 >
                   {loadingMore ? (
@@ -300,8 +300,8 @@ export default function Home() {
             ),
             title: "L'IA analyse vos goûts",
             desc: "Notre algorithme de Machine Learning compare vos notes à celles de milliers d'autres utilisateurs pour comprendre vos préférences.",
-            gradient: "from-purple-500/20 to-pink-500/20 border-purple-500/20",
-            iconBg: "from-purple-500 to-pink-500",
+            gradient: "from-yellow-500/20 to-amber-500/20 border-yellow-500/20",
+            iconBg: "from-yellow-500 to-amber-600",
           },
           {
             icon: (
@@ -311,8 +311,8 @@ export default function Home() {
             ),
             title: "Recommandations personnalisées",
             desc: "Recevez des suggestions de films adaptées à vos goûts uniques, avec des prédictions de note pour chaque recommandation.",
-            gradient: "from-pink-500/20 to-rose-500/20 border-pink-500/20",
-            iconBg: "from-pink-500 to-rose-500",
+            gradient: "from-amber-500/20 to-orange-500/20 border-amber-500/20",
+            iconBg: "from-amber-500 to-orange-600",
           },
         ].map((item, i) => (
           <div

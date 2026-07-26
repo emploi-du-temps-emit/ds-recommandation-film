@@ -8,72 +8,38 @@
 }
 
 /* ============================================
-   Thème Dark (par défaut)
+   Theme Cyberpunk - Jaune et Noir
    ============================================ */
 :root,
 [data-theme="dark"] {
   --background: #0a0a0a;
-  --foreground: #ededed;
+  --foreground: #f5f5f5;
 
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-hover: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 215, 0, 0.15);
+  --card-hover: rgba(255, 215, 0, 0.06);
 
   --input-bg: rgba(255, 255, 255, 0.05);
-  --input-border: rgba(255, 255, 255, 0.1);
-  --input-focus: #a855f7;
+  --input-border: rgba(255, 215, 0, 0.2);
+  --input-focus: #eab308;
 
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
   --text-muted: #6b7280;
 
-  --bg-gradient-from: #111827;
-  --bg-gradient-via: #1e1b4b;
-  --bg-gradient-to: #111827;
+  --bg-gradient-from: #000000;
+  --bg-gradient-via: #0a0a0a;
+  --bg-gradient-to: #000000;
 
-  --accent: #a855f7;
-  --accent-secondary: #ec4899;
+  --accent: #eab308;
+  --accent-secondary: #f59e0b;
 
-  --toast-bg: rgba(0, 0, 0, 0.8);
-  --nav-bg: rgba(17, 24, 39, 0.95);
-  --footer-border: rgba(255, 255, 255, 0.1);
+  --toast-bg: rgba(0, 0, 0, 0.9);
+  --nav-bg: rgba(0, 0, 0, 0.95);
+  --footer-border: rgba(255, 215, 0, 0.1);
 
-  --skeleton-bg: rgba(255, 255, 255, 0.05);
-  --skeleton-shimmer: rgba(255, 255, 255, 0.1);
-}
-
-/* ============================================
-   Thème Light
-   ============================================ */
-[data-theme="light"] {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(0, 0, 0, 0.1);
-  --card-hover: rgba(255, 255, 255, 0.95);
-
-  --input-bg: rgba(255, 255, 255, 0.9);
-  --input-border: rgba(0, 0, 0, 0.15);
-  --input-focus: #7c3aed;
-
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-
-  --bg-gradient-from: #f0f4ff;
-  --bg-gradient-via: #f5f0ff;
-  --bg-gradient-to: #f0f4ff;
-
-  --accent: #7c3aed;
-  --accent-secondary: #db2777;
-
-  --toast-bg: rgba(255, 255, 255, 0.95);
-  --nav-bg: rgba(248, 250, 252, 0.95);
-  --footer-border: rgba(0, 0, 0, 0.1);
-
-  --skeleton-bg: rgba(0, 0, 0, 0.06);
-  --skeleton-shimmer: rgba(0, 0, 0, 0.1);
+  --skeleton-bg: rgba(255, 255, 255, 0.03);
+  --skeleton-shimmer: rgba(255, 215, 0, 0.08);
 }
 
 body {
@@ -86,25 +52,13 @@ body {
    Animations
    ============================================ */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -113,45 +67,32 @@ body {
 }
 
 @keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(234, 179, 8, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.6); }
+}
+
+@keyframes neonPulse {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
+    text-shadow: 0 0 7px rgba(234, 179, 8, 0.3), 0 0 10px rgba(234, 179, 8, 0.2);
   }
   50% {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.8);
+    text-shadow: 0 0 15px rgba(234, 179, 8, 0.6), 0 0 30px rgba(234, 179, 8, 0.3);
   }
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes shimmer {
@@ -171,63 +112,51 @@ body {
 }
 
 @keyframes toastEnter {
-  from {
-    opacity: 0;
-    transform: translateX(100%) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
+  from { opacity: 0; transform: translateX(100%) scale(0.8); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 @keyframes toastExit {
-  from {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%) scale(0.8);
-  }
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to { opacity: 0; transform: translateX(100%) scale(0.8); }
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(92% 0 1% 0); transform: translate(1px, -3px); }
+  40% { clip-path: inset(43% 0 1% 0); transform: translate(-1px, 3px); }
+  60% { clip-path: inset(25% 0 58% 0); transform: translate(3px, 1px); }
+  80% { clip-path: inset(54% 0 7% 0); transform: translate(-3px, -2px); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, 1px); }
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(234, 179, 8, 0.2); }
+  50% { border-color: rgba(234, 179, 8, 0.5); }
 }
 
 /* Utility classes */
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-.animate-fade-in-down {
-  animation: fadeInDown 0.4s ease-out forwards;
-}
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-.animate-glow {
-  animation: pulseGlow 2s infinite;
-}
-.animate-slide-in {
-  animation: slideIn 0.4s ease-out forwards;
-}
-.animate-slide-in-down {
-  animation: slideInDown 0.4s ease-out forwards;
-}
-.animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-.animate-star-pop {
-  animation: starPop 0.4s ease-out forwards;
-}
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+.animate-fade-in-down { animation: fadeInDown 0.4s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.animate-glow { animation: pulseGlow 2s infinite; }
+.animate-neon { animation: neonPulse 2s ease-in-out infinite; }
+.animate-slide-in { animation: slideIn 0.4s ease-out forwards; }
+.animate-slide-in-down { animation: slideInDown 0.4s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.3s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-star-pop { animation: starPop 0.4s ease-out forwards; }
+.animate-glitch { animation: glitch 0.3s ease-in-out infinite; }
+.animate-border-glow { animation: borderGlow 2s ease-in-out infinite; }
 
 /* Toast animations */
-.toast-enter {
-  animation: toastEnter 0.4s ease-out forwards;
-}
-.toast-exit {
-  animation: toastExit 0.3s ease-in forwards;
-}
+.toast-enter { animation: toastEnter 0.4s ease-out forwards; }
+.toast-exit { animation: toastExit 0.3s ease-in forwards; }
 
 /* Delay utilities */
 .animate-delay-100 { animation-delay: 100ms; }
@@ -237,29 +166,17 @@ body {
 .animate-delay-500 { animation-delay: 500ms; }
 
 /* ============================================
-   Scrollbar personnalisée
+   Scrollbar personnalisee
    ============================================ */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--accent) 30%, transparent);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--accent) 50%, transparent);
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(234, 179, 8, 0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(234, 179, 8, 0.5); }
 
 /* ============================================
-   Sélection
+   Selection
    ============================================ */
-::selection {
-  background: color-mix(in srgb, var(--accent) 40%, transparent);
-  color: var(--text-primary);
-}
+::selection { background: rgba(234, 179, 8, 0.3); color: #f5f5f5; }
 
 /* ============================================
    Transitions globales
@@ -268,6 +185,22 @@ body {
   transition-property: background-color, border-color, color, fill, stroke, box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+
+/* ============================================
+   Scan line effect
+   ============================================ */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(234, 179, 8, 0.03);
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanLine 8s linear infinite;
 }
 
 /* ============================================
@@ -282,4 +215,17 @@ body {
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   Cyber accent utilities
+   ============================================ */
+.cyber-border {
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.05);
+}
+
+.cyber-border:hover {
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.1);
 }
