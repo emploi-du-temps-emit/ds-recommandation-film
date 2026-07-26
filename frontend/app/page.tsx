@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import MovieCard from "@/components/MovieCard";
 import MovieSearch from "@/components/MovieSearch";
 import GenreFilter from "@/components/GenreFilter";
+import RecommendationsList from "@/components/RecommendationsList";
 import { api, Movie } from "@/services/api";
 import { useToast } from "@/context/ToastContext";
 
@@ -276,6 +277,11 @@ export default function Home() {
             )}
           </>
         )}
+      </section>
+
+      {/* Recommandations personnalisées */}
+      <section className="animate-fade-in-up animate-delay-300">
+        <RecommendationsList />
       </section>
 
       {/* Section explicative améliorée */}
