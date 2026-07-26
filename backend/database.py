@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker
 # En production : utiliser la variable d'environnement DATABASE_URL
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:postgres@localhost:5432/movie_recommender",
+    "postgresql+psycopg://postgres:postgres@localhost:5432/movie_recommender",
 )
 
 # Création du moteur SQLAlchemy

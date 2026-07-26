@@ -66,8 +66,8 @@ class MovieRecommender:
         self.movie_ids = self.user_movie_matrix.columns
 
         print(
-            f"✅ Matrice créée : {self.user_movie_matrix.shape[0]} "
-            f"utilisateurs × {self.user_movie_matrix.shape[1]} films"
+            f"[OK] Matrice creee : {self.user_movie_matrix.shape[0]} "
+            f"utilisateurs x {self.user_movie_matrix.shape[1]} films"
         )
 
         print("[Similarity] Calcul de la matrice de similarité...")
@@ -78,7 +78,7 @@ class MovieRecommender:
         # Calcul de la similarité cosinus entre tous les utilisateurs
         self.similarity_matrix = cosine_similarity(sparse_matrix)
 
-        print(f"✅ Matrice de similarité calculée : {self.similarity_matrix.shape}")
+        print(f"[OK] Matrice de similarite calculee : {self.similarity_matrix.shape}")
 
     def recommend(
         self, user_id: int, n_recommendations: int = 5
@@ -202,7 +202,7 @@ class MovieRecommender:
             filepath: Chemin du fichier de sauvegarde
         """
         joblib.dump(self, filepath)
-        print(f"✅ Modèle sauvegardé dans {filepath}")
+        print(f"[OK] Modele sauvegarde dans {filepath}")
 
     @staticmethod
     def load(filepath: str) -> "MovieRecommender":
