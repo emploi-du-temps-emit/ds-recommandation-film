@@ -17,7 +17,7 @@ export default function NotFound() {
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[var(--color-2)] rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
           </div>
           <div className="absolute inset-0 animate-spin" style={{ animationDuration: "12s" }}>
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
+            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2.5 h-2.5 bg-[var(--color-1)] rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
           </div>
         </div>
 
@@ -48,8 +48,8 @@ export default function NotFound() {
           <Link
             href="/login"
             className="px-8 py-3 bg-[var(--card-bg)] text-[var(--text-primary)] 
-                       rounded-xl font-medium border border-[var(--card-border)]
-                       hover:bg-[var(--card-hover)] transition-all duration-200
+                       rounded-xl font-medium border border-[var(--color-1)]/30
+                       hover:bg-[var(--color-1)]/10 transition-all duration-200
                        active:scale-95"
           >
             Se connecter

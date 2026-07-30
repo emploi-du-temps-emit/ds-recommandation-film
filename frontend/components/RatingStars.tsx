@@ -52,7 +52,7 @@ export default function RatingStars({
               !readOnly
                 ? "cursor-pointer hover:scale-125 active:scale-150"
                 : "cursor-default"
-            } ${filled ? "text-yellow-400 scale-110" : "text-[var(--text-muted)] opacity-40"}`}
+            } ${filled ? "text-[var(--color-1)] scale-110" : "text-[var(--text-muted)] opacity-40"}`}
             disabled={readOnly}
             aria-label={`Noter ${star} étoile${star > 1 ? "s" : ""}`}
           >

@@ -16,6 +16,7 @@ class Movie(BaseModel):
     id: int
     title: str
     genres: str
+    poster_url: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -23,7 +24,6 @@ class Movie(BaseModel):
 
 class MovieDetail(Movie):
     """Schéma détaillé d'un film (avec infos optionnelles)"""
-    poster_url: Optional[str] = None
     overview: Optional[str] = None
     release_year: Optional[int] = None
 

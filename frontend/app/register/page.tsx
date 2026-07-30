@@ -257,7 +257,7 @@ export default function RegisterPage() {
           Déjà un compte ?{" "}
           <Link
             href="/login"
-            className="text-[var(--color-1)] hover:text-[var(--color-3)] underline font-medium transition-colors"
+            className="text-[var(--color-1)] hover:text-[var(--color-1)] underline font-medium transition-colors"
           >
             Se connecter
           </Link>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { api, MovieRecommendation } from "@/services/api";
 import MovieCard from "./MovieCard";
-import { Info } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function RecommendationsList() {
   const [recommendations, setRecommendations] = useState<
@@ -68,10 +68,10 @@ export default function RecommendationsList() {
           Recommandations
         </h2>
         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-6 text-center animate-scale-in">
-          <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-            <Info className="w-6 h-6 text-[var(--color-1)]" />
+          <div className="w-12 h-12 bg-[var(--color-1)]/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <Sparkles className="w-6 h-6 text-[var(--color-1)]" />
           </div>
-          <p className="text-yellow-400 text-sm">{error}</p>
+          <p className="text-[var(--color-1)] text-sm">{error}</p>
         </div>
       </section>
     );

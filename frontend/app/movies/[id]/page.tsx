@@ -96,25 +96,24 @@ export default function MovieDetailPage() {
   const year = yearMatch ? yearMatch[1] : "";
   const cleanTitle = movie.title.replace(/\s*\(\d{4}\)/, "");
 
-  // Générer des couleurs uniques pour le gradient du poster
-  const hue1 = ((movie.id * 137.508) % 360);
-  const hue2 = ((movie.id * 237.508 + 60) % 360);
-
   return (
     <div className="space-y-8 animate-fade-in-up">
       {/* Hero du film */}
       <div className="bg-[var(--card-bg)] backdrop-blur-lg rounded-2xl overflow-hidden border border-[var(--card-border)]">
         <div className="md:flex">
-          {/* Poster avec gradient */}
-          <div
-            className="md:w-96 h-80 md:h-auto flex items-center justify-center shrink-0 relative"
-            style={{
-              background: `linear-gradient(135deg, hsla(${hue1}, 60%, 30%, 0.4), hsla(${hue2}, 60%, 40%, 0.3))`,
-            }}
-          >
-            <div className="w-28 h-28 bg-[var(--color-1)]/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
-              MR
-            </div>
+          {/* Poster */}
+          <div className="md:w-96 h-80 md:h-auto flex items-center justify-center shrink-0 relative bg-[var(--skeleton-bg)] overflow-hidden">
+            {movie.poster_url ? (
+              <img
+                src={movie.poster_url}
+                alt={cleanTitle}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-28 h-28 bg-[var(--color-1)]/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
+                MR
+              </div>
+            )}
           </div>
 
           {/* Infos */}
@@ -160,7 +159,7 @@ export default function MovieDetailPage() {
                   {isAuthenticated ? "Votre note" : "Connectez-vous pour noter"}
                 </h3>
                 {userRating > 0 && (
-                  <span className="text-sm font-medium text-yellow-400">
+                  <span className="text-sm font-medium text-[var(--color-1)]">
                     {userRating}/5
                   </span>
                 )}
@@ -241,7 +240,6 @@ function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRa
   const router = useRouter();
   const cleanTitle = movie.title.replace(/\s*\(\d{4}\)/, "");
   const genres = movie.genres.split("|").filter(Boolean).slice(0, 2);
-  const hue1 = ((movie.id * 137.508) % 360);
 
   return (
     <div
@@ -251,16 +249,13 @@ function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRa
       onClick={() => router.push(`/movies/${movie.id}`)}
     >
       <div
-        className="h-28 flex items-center justify-center relative"
-        style={{
-          background: `linear-gradient(135deg, hsla(${hue1}, 70%, 40%, 0.3), hsla(${(hue1 + 60) % 360}, 70%, 50%, 0.2))`,
-        }}
+        className="h-28 flex items-center justify-center relative bg-[var(--skeleton-bg)]"
       >
         <div className="w-12 h-12 bg-[var(--color-1)]/40 rounded-xl flex items-center justify-center text-base font-bold text-white/50 group-hover:scale-110 transition-transform duration-300">
           MR
         </div>
         {predictedRating && (
-          <div className="absolute top-2 right-2 bg-yellow-500 text-gray-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+          <div className="absolute top-2 right-2 bg-[var(--color-1)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
             <Star className="w-3 h-3 inline fill-current" /> {predictedRating.toFixed(1)}
           </div>
         )}

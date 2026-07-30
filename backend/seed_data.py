@@ -120,6 +120,11 @@ def main():
         help="Chemin vers le fichier movies.csv",
     )
     parser.add_argument(
+        "--links",
+        default=os.path.join(default_data_dir, "links.csv"),
+        help="Chemin vers le fichier links.csv (TMDB IDs)",
+    )
+    parser.add_argument(
         "--ratings",
         default=os.path.join(default_data_dir, "ratings.csv"),
         help="Chemin vers le fichier ratings.csv",
@@ -140,7 +145,7 @@ def main():
         if args.clear:
             clear_tables(db)
 
-        movies_count = bulk_import_movies(db, args.movies)
+        movies_count = bulk_import_movies(db, args.movies, links_path=args.links)
         print(f"[OK] {movies_count} films importes avec succes")
 
         ratings_count = import_ratings(db, args.ratings)

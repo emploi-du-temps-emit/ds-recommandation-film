@@ -52,9 +52,6 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-[var(--color-1)] rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold text-white shadow-lg shadow-[var(--color-1)]/20 mb-4">
-            MR
-          </div>
           <h1 className="text-3xl font-bold text-[var(--text-primary)]">Connexion</h1>
           <p className="text-[var(--text-secondary)] text-sm mt-1">
             Connectez-vous pour découvrir vos recommandations
@@ -155,7 +152,7 @@ export default function LoginPage() {
           Pas encore de compte ?{" "}
           <Link
             href="/register"
-            className="text-[var(--color-1)] hover:text-[var(--color-3)] underline font-medium transition-colors"
+            className="text-[var(--color-1)] hover:text-[var(--color-1)] underline font-medium transition-colors"
           >
             S&apos;inscrire
           </Link>

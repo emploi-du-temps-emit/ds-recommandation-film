@@ -3,15 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { useTheme } from "@/context/ThemeContext";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -79,7 +77,7 @@ export default function Navbar() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isActive("/")
                   ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
+                  : "text-[var(--text-secondary)] hover:bg-[var(--color-1)]/10 hover:text-[var(--color-1)]"
               }`}
             >
               Accueil
@@ -129,27 +127,10 @@ export default function Navbar() {
               </div>
             )}
 
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              className="ml-3 p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] 
-                         hover:bg-white/5 transition-all duration-200"
-              aria-label={theme === "dark" ? "Mode clair" : "Mode sombre"}
-              title={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-              aria-label={theme === "dark" ? "Mode clair" : "Mode sombre"}
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -169,7 +150,7 @@ export default function Navbar() {
                 className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive("/")
                     ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
-                    : "text-[var(--text-secondary)]"
+                    : "text-[var(--text-secondary)] hover:bg-[var(--color-1)]/10 hover:text-[var(--color-1)]"
                 }`}
               >
                 Accueil
@@ -192,12 +173,7 @@ export default function Navbar() {
                       {username ? username.charAt(0).toUpperCase() : "?"}
                     </div>
                     <span className="text-sm text-[var(--text-primary)] flex-1">{username}</span>
-                    <button
-                      onClick={handleLogout}
-                      className="px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-                    >
-                      Déconnexion
-                    </button>
+                  
                   </div>
                 </>
               ) : (

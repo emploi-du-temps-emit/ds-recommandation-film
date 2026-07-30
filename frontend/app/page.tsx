@@ -100,40 +100,47 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      {/* Hero Section améliorée */}
-      <section className="relative text-center py-16 md:py-20 overflow-hidden animate-fade-in-up">
-        {/* Background effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-[var(--color-1)]/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-[var(--color-2)]/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
-        </div>
+      {/* Hero Section avec video background */}
+      <section className="relative text-center py-24 md:py-32 overflow-hidden min-h-[70vh] flex items-center">
+        {/* Video de fond */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
 
-        <div className="relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-[var(--color-1)]/10 border border-[var(--color-1)]/20 rounded-full px-4 py-1.5 mb-6 animate-fade-in-down">
-            <span className="w-2 h-2 bg-[var(--color-1)] rounded-full animate-pulse" />
-          </div>
+        {/* Overlay sombre pour la lisibilité */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 z-[1]" />
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-[var(--color-1)]">
-            MovieReco
+        {/* Contenu */}
+        <div className="relative z-10 w-full">
+          <h1 className="text-6xl md:text-8xl font-bold mb-4 text-white drop-shadow-lg">
+            <span className="text-[var(--color-1)]">Movie</span>Reco
           </h1>
-          <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 drop-shadow-md">
             Découvrez des films qui correspondent à vos goûts grâce à notre
             système de recommandation intelligent basé sur le Machine Learning.
           </p>
 
           {/* Stats rapides */}
-          <div className="flex justify-center space-x-8 text-sm">
+          <div className="flex justify-center space-x-12 text-sm">
             <div className="text-center">
-              <span className="block text-2xl font-bold text-[var(--text-primary)]">9 700+</span>
-              <span className="text-[var(--text-muted)]">Films</span>
+              <span className="block text-3xl font-bold text-white drop-shadow-lg">9 700+</span>
+              <span className="text-gray-400">Films</span>
             </div>
             <div className="text-center">
-              <span className="block text-2xl font-bold text-[var(--text-primary)]">100K+</span>
-              <span className="text-[var(--text-muted)]">Évaluations</span>
+              <span className="block text-3xl font-bold text-white drop-shadow-lg">100K+</span>
+              <span className="text-gray-400">Évaluations</span>
             </div>
             <div className="text-center">
-              <span className="block text-2xl font-bold text-[var(--text-primary)]">IA</span>
-              <span className="text-[var(--text-muted)]">Recommandations</span>
+              <span className="block text-3xl font-bold text-[var(--color-1)] drop-shadow-lg">IA</span>
+              <span className="text-gray-400">Recommandations</span>
             </div>
           </div>
         </div>

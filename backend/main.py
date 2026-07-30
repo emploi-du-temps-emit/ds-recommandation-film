@@ -7,6 +7,8 @@ API de recommandation de films basée sur le Machine Learning.
 from fastapi import FastAPI, Depends, HTTPException, status, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy import text
+from sqlalchemy.exc import ProgrammingError
 from typing import List, Optional
 import joblib
 import os
@@ -19,6 +21,15 @@ from auth import create_access_token, require_user
 
 # Création des tables dans la base de données
 models.Base.metadata.create_all(bind=engine)
+
+# Migration : ajouter les colonnes tmdb_id et poster_url si elles n'existent pas
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE movies ADD COLUMN IF NOT EXISTS tmdb_id INTEGER"))
+        conn.execute(text("ALTER TABLE movies ADD COLUMN IF NOT EXISTS poster_url VARCHAR(500)"))
+        conn.commit()
+except ProgrammingError:
+    pass  # La table n'existe pas encore ou colonnes deja presentes
 
 # Initialisation de l'application
 app = FastAPI(

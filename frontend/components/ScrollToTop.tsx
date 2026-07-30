@@ -22,7 +22,7 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-xl 
-                 bg-[var(--color-2)] 
+                 bg-[var(--color-1)] 
                  text-white shadow-lg shadow-[var(--color-1)]/25
                  flex items-center justify-center
                  transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-[var(--color-1)]/40

@@ -26,6 +26,7 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-movie_recommender}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-in-production-docker}
+      TMDB_ACCESS_TOKEN: ${TMDB_ACCESS_TOKEN:-}
     volumes:
       - ./models:/app/models
       - ./data:/data

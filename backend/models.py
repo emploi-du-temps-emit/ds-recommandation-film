@@ -47,6 +47,8 @@ class Movie(Base):
     id = Column(Integer, primary_key=True, index=True)  # movieId de MovieLens
     title = Column(String(255), nullable=False)
     genres = Column(String(255), nullable=False)
+    tmdb_id = Column(Integer, nullable=True)  # ID TMDB pour les posters
+    poster_url = Column(String(500), nullable=True)  # URL du poster en cache
 
     # Relations
     ratings = relationship("Rating", back_populates="movie", cascade="all, delete-orphan")
