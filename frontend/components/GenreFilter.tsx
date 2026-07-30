@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const GENRES = [
   "Tous",
@@ -68,9 +69,7 @@ export default function GenreFilter({ selected, onSelect, movieCount }: GenreFil
                      hover:text-[var(--text-primary)] transition-all shadow-lg"
           aria-label="Défiler à gauche"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ChevronLeft className="w-4 h-4" />
         </button>
       )}
 
@@ -87,8 +86,8 @@ export default function GenreFilter({ selected, onSelect, movieCount }: GenreFil
             className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium 
                        transition-all duration-200 border ${
               selected === genre
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white border-transparent shadow-lg shadow-purple-500/20"
-                : "bg-[var(--card-bg)] text-[var(--text-secondary)] border-[var(--card-border)] hover:border-purple-500/30 hover:text-[var(--text-primary)]"
+                ? "bg-[var(--color-2)] text-white border-transparent shadow-lg shadow-[var(--color-1)]/20"
+                : "bg-[var(--card-bg)] text-[var(--text-secondary)] border-[var(--card-border)] hover:border-[var(--color-1)]/30 hover:text-[var(--text-primary)]"
             }`}
           >
             {genre}
@@ -106,9 +105,7 @@ export default function GenreFilter({ selected, onSelect, movieCount }: GenreFil
                      hover:text-[var(--text-primary)] transition-all shadow-lg"
           aria-label="Défiler à droite"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+          <ChevronRight className="w-4 h-4" />
         </button>
       )}
 

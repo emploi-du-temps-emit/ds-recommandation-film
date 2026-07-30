@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" width="1200" height="628">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/><stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eab308"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="628" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <rect width="40" height="40" fill="none"/><rect width="38" height="38" fill="none" stroke="rgba(234,179,8,0.03)" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="628" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="600" y="55" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="28" fill="#eab308" filter="url(#glow)">⚙️ Algorithme de Recommandation</text>
+  <text x="600" y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#6b7280">Filtrage collaboratif : similarite entre utilisateurs</text>
+
+  <!-- Step 1: Users -->
+  <rect x="60" y="115" width="220" height="140" rx="12" fill="rgba(234,179,8,0.06)" stroke="rgba(234,179,8,0.2)" stroke-width="1.5"/>
+  <text x="170" y="143" text-anchor="middle" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">1. Utilisateurs</text>
+  <!-- People icons -->
+  <circle cx="120" cy="170" r="12" fill="none" stroke="#eab308" stroke-width="1.5"/>
+  <circle cx="120" cy="165" r="4" fill="none" stroke="#eab308" stroke-width="1"/>
+  <circle cx="155" cy="170" r="12" fill="none" stroke="#eab308" stroke-width="1.5"/>
+  <circle cx="155" cy="165" r="4" fill="none" stroke="#eab308" stroke-width="1"/>
+  <circle cx="190" cy="170" r="12" fill="none" stroke="#eab308" stroke-width="1.5"/>
+  <circle cx="190" cy="165" r="4" fill="none" stroke="#eab308" stroke-width="1"/>
+  <circle cx="250" cy="170" r="12" fill="none" stroke="#eab308" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="250" cy="165" r="4" fill="none" stroke="#eab308" stroke-width="1" opacity="0.5"/>
+  <text x="170" y="205" text-anchor="middle" font-family="Arial" font-size="12" fill="#a3a3a3">610 utilisateurs</text>
+  <text x="170" y="225" text-anchor="middle" font-family="Arial" font-size="11" fill="#6b7280">Notent des films</text>
+
+  <!-- Arrow -->
+  <line x1="280" y1="185" x2="320" y2="185" stroke="#eab308" stroke-width="2"/>
+  <polygon points="320,179 332,185 320,191" fill="#eab308"/>
+
+  <!-- Step 2: Matrix -->
+  <rect x="335" y="115" width="220" height="140" rx="12" fill="rgba(234,179,8,0.06)" stroke="rgba(234,179,8,0.2)" stroke-width="1.5"/>
+  <text x="445" y="143" text-anchor="middle" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">2. Matrice creuse</text>
+  <!-- Grid matrix -->
+  <rect x="360" y="155" width="50" height="50" rx="2" fill="none" stroke="rgba(234,179,8,0.3)" stroke-width="0.5"/>
+  <text x="370" y="170" font-family="monospace" font-size="8" fill="#a3a3a3">4.5</text>
+  <text x="385" y="170" font-family="monospace" font-size="8" fill="#525252">0</text>
+  <text x="370" y="182" font-family="monospace" font-size="8" fill="#525252">0</text>
+  <text x="385" y="182" font-family="monospace" font-size="8" fill="#a3a3a3">3.0</text>
+  <text x="395" y="182" font-family="monospace" font-size="8" fill="#525252">0</text>
+  <text x="370" y="194" font-family="monospace" font-size="8" fill="#a3a3a3">2.0</text>
+  <text x="385" y="194" font-family="monospace" font-size="8" fill="#525252">0</text>
+  
+  <text x="445" y="175" text-anchor="middle" font-family="Arial" font-size="11" fill="#a3a3a3">610 x 9724</text>
+  <text x="445" y="192" text-anchor="middle" font-family="Arial" font-size="10" fill="#6b7280">csr_matrix</text>
+  <text x="445" y="210" text-anchor="middle" font-family="Arial" font-size="11" fill="#a3a3a3">100 836 evaluations</text>
+
+  <!-- Arrow -->
+  <line x1="555" y1="185" x2="595" y2="185" stroke="#eab308" stroke-width="2"/>
+  <polygon points="595,179 607,185 595,191" fill="#eab308"/>
+
+  <!-- Step 3: Cosine Similarity -->
+  <rect x="610" y="115" width="220" height="140" rx="12" fill="rgba(234,179,8,0.06)" stroke="rgba(234,179,8,0.2)" stroke-width="1.5"/>
+  <text x="720" y="143" text-anchor="middle" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">3. Similarite Cosinus</text>
+  <!-- Angle illustration -->
+  <circle cx="720" cy="185" r="35" fill="none" stroke="rgba(234,179,8,0.1)" stroke-width="1"/>
+  <line x1="720" y1="185" x2="720" y2="152" stroke="#eab308" stroke-width="2"/>
+  <line x1="720" y1="185" x2="748" y2="160" stroke="#eab308" stroke-width="2" opacity="0.7"/>
+  <text x="708" y="172" font-family="Arial" font-size="8" fill="#eab308">θ</text>
+  <text x="720" y="233" text-anchor="middle" font-family="Arial" font-size="11" fill="#a3a3a3">Top 10 voisins</text>
+  <text x="720" y="248" text-anchor="middle" font-family="Arial" font-size="10" fill="#6b7280">cos(θ) = proche → similaire</text>
+
+  <!-- Arrow -->
+  <line x1="830" y1="185" x2="870" y2="185" stroke="#eab308" stroke-width="2"/>
+  <polygon points="870,179 882,185 870,191" fill="#eab308"/>
+
+  <!-- Step 4: Predictions -->
+  <rect x="885" y="115" width="250" height="140" rx="12" fill="rgba(234,179,8,0.1)" stroke="#eab308" stroke-width="2"/>
+  <rect x="885" y="115" width="250" height="30" rx="12" fill="url(#yellow)"/>
+  <text x="1010" y="135" text-anchor="middle" font-family="Arial" font-size="13" fill="#000" font-weight="bold">4. Prediction !</text>
+  <text x="1010" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#a3a3a3">Moyenne ponderee</text>
+  <text x="1010" y="188" text-anchor="middle" font-family="Arial" font-size="11" fill="#6b7280">des notes des voisins</text>
+  <!-- Star -->
+  <polygon points="1010,200 1016,216 1034,216 1019,226 1024,242 1010,232 996,242 1001,226 986,216 1004,216" fill="#eab308"/>
+  <text x="1010" y="245" text-anchor="middle" font-family="Arial" font-size="10" fill="#525252">5 films recommandes</text>
+
+  <!-- Bottom: flow illustration -->
+  <rect x="60" y="285" width="1075" height="120" rx="12" fill="rgba(234,179,8,0.03)" stroke="rgba(234,179,8,0.1)" stroke-width="1"/>
+  <text x="80" y="312" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">🔁 Flux de recommendation</text>
+
+  <rect x="100" y="325" width="180" height="55" rx="8" fill="rgba(234,179,8,0.06)"/>
+  <text x="115" y="348" font-family="Arial" font-size="11" fill="#a3a3a3">Alice note 5 ★</text>
+  <text x="115" y="365" font-family="Arial" font-size="10" fill="#6b7280">Inception, Matrix</text>
+
+  <text x="295" y="352" font-family="Arial" font-size="18" fill="#d97706">→</text>
+
+  <rect x="320" y="325" width="180" height="55" rx="8" fill="rgba(234,179,8,0.06)"/>
+  <text x="335" y="348" font-family="Arial" font-size="11" fill="#a3a3a3">Bob aime les memes films</text>
+  <text x="335" y="365" font-family="Arial" font-size="10" fill="#6b7280">cos(θ) = 0.92</text>
+
+  <text x="515" y="352" font-family="Arial" font-size="18" fill="#d97706">→</text>
+
+  <rect x="540" y="325" width="180" height="55" rx="8" fill="rgba(234,179,8,0.06)"/>
+  <text x="555" y="348" font-family="Arial" font-size="11" fill="#a3a3a3">Alice n'a pas vu</text>
+  <text x="555" y="365" font-family="Arial" font-size="10" fill="#6b7280">Interstellar, Dune...</text>
+
+  <text x="735" y="352" font-family="Arial" font-size="18" fill="#d97706">→</text>
+
+  <rect x="755" y="325" width="200" height="55" rx="8" fill="rgba(234,179,8,0.1)" stroke="#eab308" stroke-width="1"/>
+  <text x="775" y="348" font-family="Arial" font-size="11" fill="#eab308" font-weight="bold">Recommande !</text>
+  <text x="775" y="365" font-family="Arial" font-size="10" fill="#6b7280">Interstellar, Dune, Tenet</text>
+
+  <!-- Bottom key points -->
+  <rect x="60" y="430" width="1075" height="85" rx="12" fill="rgba(234,179,8,0.03)" stroke="rgba(234,179,8,0.1)" stroke-width="1"/>
+  <text x="80" y="455" font-family="Arial" font-size="14" fill="#eab308" font-weight="bold">💡 Points cles</text>
+  
+  <rect x="100" y="465" width="500" height="30" rx="6" fill="rgba(234,179,8,0.06)"/>
+  <text x="115" y="485" font-family="Arial" font-size="11" fill="#a3a3a3">Aucune metadonnee necessaire : que des notes utilisateurs</text>
+
+  <rect x="615" y="465" width="500" height="30" rx="6" fill="rgba(234,179,8,0.06)"/>
+  <text x="630" y="485" font-family="Arial" font-size="11" fill="#a3a3a3">Minimum 3 notes requises pour des recommandations pertinentes</text>
+
+  <text x="600" y="610" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="14" fill="#525252">#CollaborativeFiltering #MachineLearning #RecommendationSystem</text>
+</svg>

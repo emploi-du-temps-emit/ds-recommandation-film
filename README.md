@@ -71,6 +71,15 @@ movie-recommendation/
 |   +-- 05_modelisation.ipynb
 |   +-- 06_evaluation.ipynb
 |
++-- img-lecon/         # Visuels pour LinkedIn
+|   +-- 01-architecture.svg
+|   +-- 02-recommandation.svg
+|   +-- 03-fastapi.svg
+|   +-- 04-frontend.svg
+|   +-- 05-docker.svg
+|   +-- 06-data-science.svg
+|
++-- desc.md            # Descriptions LinkedIn
 +-- docker-compose.yml
 +-- requirements.txt
 +-- .env.example
@@ -179,6 +188,23 @@ Le modele atteint les performances suivantes :
 | TypeScript          | Typage frontend                |
 | Tailwind CSS        | Styles et animations           |
 | Docker              | Conteneurisation               |
+
+---
+
+## 📱 Post LinkedIn - Carrousel 6 slides
+
+Des visuels illustres pour presenter le projet sur LinkedIn (format carrousel 1200 × 628 px) :
+
+| Slide | Sujet | Apercu |
+|-------|-------|--------|
+| 1 | **Architecture** | Diagramme 3-tiers : Navigateur → Frontend → Backend → DB + Docker |
+| 2 | **Algorithme** | Flow filtrage collaboratif : Users → Matrice → Cosinus → Prediction |
+| 3 | **API REST** | Endpoints GET/POST/DEL + Concepts FastAPI appris |
+| 4 | **Frontend** | Maquette UI + Composants React + Animations CSS |
+| 5 | **Docker** | 3 conteneurs illustres + docker-compose + commandes |
+| 6 | **Data Science** | Stats dataset + Pipeline 5 etapes + Librairies |
+
+Les visuels sont dans le dossier [`img-lecon/`](img-lecon/), les descriptions dans [`desc.md`](desc.md).
 
 ---
 

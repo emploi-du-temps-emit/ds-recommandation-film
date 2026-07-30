@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Movie } from "@/services/api";
 import RatingStars from "./RatingStars";
+import { Star } from "lucide-react";
 
 interface MovieCardProps {
   movie: Movie;
@@ -20,12 +21,12 @@ const genreColors: Record<string, string> = {
   Comedy: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
   Crime: "bg-gray-500/20 text-gray-400 border-gray-500/30",
   Documentary: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-  Drama: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+  Drama: "bg-[var(--color-1)]/20 text-[var(--color-1)] border-[var(--color-1)]/30",
   Fantasy: "bg-indigo-500/20 text-indigo-400 border-indigo-500/30",
   Horror: "bg-gray-700/30 text-gray-300 border-gray-600/30",
-  Musical: "bg-pink-500/20 text-pink-400 border-pink-500/30",
+  Musical: "bg-[var(--color-2)]/20 text-[var(--color-2)] border-[var(--color-2)]/30",
   Mystery: "bg-violet-500/20 text-violet-400 border-violet-500/30",
-  Romance: "bg-pink-600/20 text-pink-400 border-pink-600/30",
+  Romance: "bg-[var(--color-2)]/20 text-[var(--color-2)] border-[var(--color-2)]/30",
   "Sci-Fi": "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
   Thriller: "bg-indigo-600/20 text-indigo-400 border-indigo-600/30",
   War: "bg-red-700/20 text-red-400 border-red-700/30",
@@ -57,7 +58,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
       className={`group bg-[var(--card-bg)] backdrop-blur-lg rounded-xl overflow-hidden 
                   shadow-lg border border-[var(--card-border)]
                   transition-all duration-300 
-                  ${isHovered ? "shadow-2xl shadow-purple-500/10 scale-[1.03] bg-[var(--card-hover)]" : "shadow-lg"}`}
+                  ${isHovered ? "shadow-2xl shadow-[var(--color-1)]/10 scale-[1.03] bg-[var(--card-hover)]" : "shadow-lg"}`}
       onMouseEnter={() => { setShowRating(true); setIsHovered(true); }}
       onMouseLeave={() => { setShowRating(false); setIsHovered(false); }}
     >
@@ -70,12 +71,11 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
           }}
         >
           {/* Animated overlay on hover */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent 
-                          transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-80"}`} />
+          <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-80"}`} />
           
           {/* Floating badge on hover */}
           {isHovered && (
-            <div className="absolute top-3 left-3 bg-purple-500/80 text-white text-[10px] font-medium px-2 py-1 rounded-md animate-scale-in z-10">
+            <div className="absolute top-3 left-3 bg-[var(--color-1)] text-white text-[10px] font-medium px-2 py-1 rounded-md animate-scale-in z-10">
               Voir détails
             </div>
           )}
@@ -83,15 +83,15 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
           {/* Icon */}
           <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold 
                           text-white/50 relative z-10 transition-all duration-500 
-                          ${isHovered ? "scale-110 rotate-3 bg-gradient-to-br from-purple-500/50 to-pink-500/50" : "bg-gradient-to-br from-purple-500/30 to-pink-500/30"}`}
+                          ${isHovered ? "scale-110 rotate-3 bg-[var(--color-1)]/50" : "bg-[var(--color-1)]/30"}`}
           >
             MR
           </div>
 
           {/* Prédiction badge */}
           {predictedRating && (
-            <div className="absolute top-2 right-2 bg-gradient-to-br from-yellow-400 to-amber-500 text-gray-900 text-xs font-bold px-2.5 py-1 rounded-full z-10 shadow-lg animate-scale-in">
-              ★ {predictedRating.toFixed(1)}
+            <div className="absolute top-2 right-2 bg-yellow-500 text-gray-900 text-xs font-bold px-2.5 py-1 rounded-full z-10 shadow-lg animate-scale-in">
+              <Star className="w-3 h-3 inline fill-current" /> {predictedRating.toFixed(1)}
             </div>
           )}
         </div>
@@ -101,7 +101,7 @@ export default function MovieCard({ movie, predictedRating, onRate, userId }: Mo
       <div className="p-4">
         <Link href={`/movies/${movie.id}`}>
           <h3 className="text-[var(--text-primary)] font-semibold text-sm mb-1 
-                         group-hover:text-purple-400 transition-colors duration-200
+                         group-hover:text-[var(--color-1)] transition-colors duration-200
                          line-clamp-2 leading-snug min-h-[2.5em]">
             {cleanTitle}
           </h3>
