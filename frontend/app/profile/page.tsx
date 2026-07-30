@@ -20,6 +20,7 @@ export default function ProfilePage() {
 
   const [userRatings, setUserRatings] = useState<EnrichedRating[]>([]);
   const [loadingRatings, setLoadingRatings] = useState(true);
+  const [showAllRatings, setShowAllRatings] = useState(false);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -200,7 +201,7 @@ export default function ProfilePage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {userRatings.slice().reverse().map((rating) => {
+            {userRatings.slice().reverse().slice(0, showAllRatings ? undefined : 2).map((rating) => {
               const yearMatch = rating.movie?.title.match(/\((\d{4})\)/);
               const cleanTitle = rating.movie?.title.replace(/\s*\(\d{4}\)/, "") || "Film inconnu";
               const genres = rating.movie?.genres.split("|").filter(Boolean) || [];
@@ -250,6 +251,20 @@ export default function ProfilePage() {
                 </div>
               );
             })}
+            {userRatings.length > 2 && (
+              <div className="text-center pt-2">
+                <button
+                  onClick={() => setShowAllRatings(!showAllRatings)}
+                  className="px-6 py-2 text-sm font-medium bg-[var(--color-1)]/10 text-[var(--color-1)] 
+                             rounded-lg hover:bg-[var(--color-1)]/20 transition-all duration-200
+                             border border-[var(--color-1)]/20 hover:border-[var(--color-1)]/30"
+                >
+                  {showAllRatings
+                    ? `Voir moins (${userRatings.length} avis)`
+                    : `Voir les ${userRatings.length} avis`}
+                </button>
+              </div>
+            )}
           </div>
         )}
       </section>

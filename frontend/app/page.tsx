@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import MovieCard from "@/components/MovieCard";
 import MovieSearch from "@/components/MovieSearch";
 import GenreFilter from "@/components/GenreFilter";
+import RecommendationsList from "@/components/RecommendationsList";
 import { api, Movie } from "@/services/api";
 import { useToast } from "@/context/ToastContext";
 import { AlertTriangle, Search, ChevronDown, Star, Film, TrendingUp } from "lucide-react";
@@ -153,6 +154,9 @@ export default function Home() {
           />
         </section>
       )}
+
+      {/* Recommandations personnalisées */}
+      <RecommendationsList />
 
       {/* Films */}
       <section className="animate-fade-in-up animate-delay-200">
