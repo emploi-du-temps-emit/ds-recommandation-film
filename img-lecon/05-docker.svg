@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" width="1200" height="628">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/><stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eab308"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="628" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <rect width="40" height="40" fill="none"/><rect width="38" height="38" fill="none" stroke="rgba(234,179,8,0.03)" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="628" fill="url(#grid)"/>
+
+  <text x="600" y="55" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="28" fill="#eab308" filter="url(#glow)">🐳 Docker : Conteneurisation</text>
+  <text x="600" y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#6b7280">3 services independants, 1 commande pour tout lancer</text>
+
+  <!-- Docker icon large -->
+  <rect x="80" y="110" width="200" height="60" rx="10" fill="rgba(234,179,8,0.06)" stroke="rgba(234,179,8,0.2)" stroke-width="1.5"/>
+  <text x="100" y="140" font-family="Arial" font-size="16" fill="#eab308" font-weight="bold">🐳 Docker</text>
+  <text x="100" y="158" font-family="Arial" font-size="10" fill="#6b7280">docker compose up</text>
+
+  <!-- Container 1: Frontend -->
+  <rect x="360" y="110" width="220" height="150" rx="12" fill="rgba(234,179,8,0.06)" stroke="#eab308" stroke-width="1.5"/>
+  <rect x="375" y="120" width="50" height="50" rx="25" fill="rgba(234,179,8,0.12)"/>
+  <text x="400" y="153" text-anchor="middle" font-family="Arial" font-size="20" fill="#eab308">🎨</text>
+  <text x="445" y="140" font-family="Arial" font-size="14" fill="#eab308" font-weight="bold">Frontend</text>
+  <text x="445" y="158" font-family="Arial" font-size="10" fill="#6b7280">Node 22 Alpine</text>
+  <text x="380" y="180" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Port 3000</text>
+  <text x="380" y="198" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Multi-stage build</text>
+  <text x="380" y="216" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Dev + Production</text>
+  <text x="380" y="234" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Next.js standlone</text>
+
+  <!-- Container 2: Backend -->
+  <rect x="610" y="110" width="220" height="150" rx="12" fill="rgba(234,179,8,0.06)" stroke="#eab308" stroke-width="1.5"/>
+  <rect x="625" y="120" width="50" height="50" rx="25" fill="rgba(234,179,8,0.12)"/>
+  <text x="650" y="153" text-anchor="middle" font-family="Arial" font-size="20" fill="#eab308">⚙️</text>
+  <text x="695" y="140" font-family="Arial" font-size="14" fill="#eab308" font-weight="bold">Backend</text>
+  <text x="695" y="158" font-family="Arial" font-size="10" fill="#6b7280">Python 3.10</text>
+  <text x="630" y="180" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Port 8000</text>
+  <text x="630" y="198" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Hot-reload actif</text>
+  <text x="630" y="216" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Volume data partage</text>
+  <text x="630" y="234" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Modele IA charge</text>
+
+  <!-- Container 3: Database -->
+  <rect x="860" y="110" width="220" height="150" rx="12" fill="rgba(234,179,8,0.06)" stroke="#eab308" stroke-width="1.5"/>
+  <rect x="875" y="120" width="50" height="50" rx="25" fill="rgba(234,179,8,0.12)"/>
+  <text x="900" y="153" text-anchor="middle" font-family="Arial" font-size="20" fill="#eab308">🐘</text>
+  <text x="945" y="140" font-family="Arial" font-size="14" fill="#eab308" font-weight="bold">PostgreSQL</text>
+  <text x="945" y="158" font-family="Arial" font-size="10" fill="#6b7280">15 Alpine</text>
+  <text x="880" y="180" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Port 5432</text>
+  <text x="880" y="198" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Volume persistant</text>
+  <text x="880" y="216" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Healthcheck</text>
+  <text x="880" y="234" font-family="Arial" font-size="11" fill="#a3a3a3">▸ Donnees users</text>
+
+  <!-- Communication arrows -->
+  <line x1="580" y1="140" x2="610" y2="140" stroke="#eab308" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="610,136 620,140 610,144" fill="#eab308"/>
+  <text x="595" y="133" text-anchor="middle" font-family="Arial" font-size="8" fill="#6b7280">API</text>
+
+  <line x1="830" y1="170" x2="860" y2="170" stroke="#eab308" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="860,166 870,170 860,174" fill="#eab308"/>
+  <text x="845" y="163" text-anchor="middle" font-family="Arial" font-size="8" fill="#6b7280">SQL</text>
+
+  <!-- docker-compose.yml visual -->
+  <rect x="80" y="295" width="1000" height="120" rx="12" fill="rgba(234,179,8,0.03)" stroke="rgba(234,179,8,0.1)" stroke-width="1"/>
+  <text x="100" y="322" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">📄 docker-compose.yml</text>
+  
+  <text x="100" y="348" font-family="monospace" font-size="10" fill="#6b7280">services:</text>
+  <text x="120" y="366" font-family="monospace" font-size="10" fill="#eab308">frontend:</text>
+  <text x="140" y="384" font-family="monospace" font-size="10" fill="#a3a3a3">build: ./frontend</text>
+  <text x="120" y="402" font-family="monospace" font-size="10" fill="#eab308">backend:</text>
+  <text x="140" y="420" font-family="monospace" font-size="10" fill="#a3a3a3">build: ./backend + volumes : [data]</text>
+  <text x="120" y="438" font-family="monospace" font-size="10" fill="#eab308">postgres:</text>
+  <text x="140" y="456" font-family="monospace" font-size="10" fill="#a3a3a3">image: postgres:15-alpine + volumes : [pgdata]</text>
+
+  <!-- Commands -->
+  <rect x="80" y="440" width="1000" height="70" rx="12" fill="rgba(234,179,8,0.03)" stroke="rgba(234,179,8,0.1)" stroke-width="1"/>
+  <text x="100" y="465" font-family="Arial" font-size="13" fill="#eab308" font-weight="bold">⌨️ Commandes essentielles</text>
+  
+  <rect x="100" y="475" width="290" height="22" rx="6" fill="rgba(234,179,8,0.06)"/>
+  <text x="115" y="491" font-family="monospace" font-size="10" fill="#eab308">docker compose up --build</text>
+  
+  <rect x="410" y="475" width="240" height="22" rx="6" fill="rgba(234,179,8,0.06)"/>
+  <text x="425" y="491" font-family="monospace" font-size="10" fill="#eab308">docker compose down -v</text>
+
+  <rect x="670" y="475" width="390" height="22" rx="6" fill="rgba(234,179,8,0.06)"/>
+  <text x="685" y="491" font-family="monospace" font-size="10" fill="#eab308">docker exec -it CONTAINER python seed_data.py</text>
+
+  <text x="600" y="610" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="14" fill="#525252">#Docker #DevOps #Containers #DockerCompose #Deployment</text>
+</svg>

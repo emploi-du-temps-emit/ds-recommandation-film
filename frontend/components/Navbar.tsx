@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
+import { Sun, Moon, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,10 +64,10 @@ export default function Navbar() {
             href="/"
             className="flex items-center space-x-2 text-xl font-bold hover:opacity-80 transition-opacity group"
           >
-            <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
+            <div className="w-9 h-9 bg-[var(--color-1)] rounded-xl flex items-center justify-center text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
               MR
             </div>
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="text-[var(--color-1)] font-bold">
               MovieReco
             </span>
           </Link>
@@ -77,7 +78,7 @@ export default function Navbar() {
               href="/"
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isActive("/")
-                  ? "bg-purple-500/15 text-purple-400"
+                  ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
                   : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
               }`}
             >
@@ -90,7 +91,7 @@ export default function Navbar() {
                   href="/profile"
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive("/profile")
-                      ? "bg-purple-500/15 text-purple-400"
+                      ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
                       : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
                   }`}
                 >
@@ -98,7 +99,7 @@ export default function Navbar() {
                 </Link>
 
                 <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-[var(--card-border)]">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                  <div className="w-8 h-8 bg-[var(--color-1)] rounded-full flex items-center justify-center text-xs font-bold text-white">
                     {username ? username.charAt(0).toUpperCase() : "?"}
                   </div>
                   <button
@@ -119,9 +120,9 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-600 
+                  className="px-4 py-2 text-sm font-medium bg-[var(--color-2)] 
                              text-white rounded-lg hover:opacity-90 transition-all duration-200
-                             hover:shadow-lg hover:shadow-purple-500/25"
+                             hover:shadow-lg hover:shadow-[var(--color-1)]/25"
                 >
                   S&apos;inscrire
                 </Link>
@@ -136,17 +137,7 @@ export default function Navbar() {
               aria-label={theme === "dark" ? "Mode clair" : "Mode sombre"}
               title={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
             >
-              {theme === "dark" ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
           </div>
 
@@ -157,28 +148,14 @@ export default function Navbar() {
               className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               aria-label={theme === "dark" ? "Mode clair" : "Mode sombre"}
             >
-              {theme === "dark" ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               aria-label="Menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -191,7 +168,7 @@ export default function Navbar() {
                 href="/"
                 className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive("/")
-                    ? "bg-purple-500/15 text-purple-400"
+                    ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
                     : "text-[var(--text-secondary)]"
                 }`}
               >
@@ -204,14 +181,14 @@ export default function Navbar() {
                     href="/profile"
                     className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                       isActive("/profile")
-                        ? "bg-purple-500/15 text-purple-400"
+                        ? "bg-[var(--color-1)]/15 text-[var(--color-1)]"
                         : "text-[var(--text-secondary)]"
                     }`}
                   >
                     Mon profil
                   </Link>
                   <div className="flex items-center space-x-3 px-4 py-3 mt-2 border-t border-[var(--card-border)]">
-                    <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                    <div className="w-8 h-8 bg-[var(--color-1)] rounded-full flex items-center justify-center text-xs font-bold text-white">
                       {username ? username.charAt(0).toUpperCase() : "?"}
                     </div>
                     <span className="text-sm text-[var(--text-primary)] flex-1">{username}</span>
@@ -233,7 +210,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/register"
-                    className="w-full text-center px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:opacity-90 transition-all"
+                    className="w-full text-center px-4 py-2.5 text-sm font-medium bg-[var(--color-2)] text-white rounded-lg hover:opacity-90 transition-all"
                   >
                     S&apos;inscrire
                   </Link>

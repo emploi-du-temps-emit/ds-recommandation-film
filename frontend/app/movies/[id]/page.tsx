@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { api, Movie, MovieRecommendation } from "@/services/api";
 import RatingStars from "@/components/RatingStars";
 import { useToast } from "@/context/ToastContext";
+import { ChevronLeft, Star } from "lucide-react";
 
 export default function MovieDetailPage() {
   const params = useParams();
@@ -61,7 +62,7 @@ export default function MovieDetailPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-16 h-16 border-4 border-[var(--color-1)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-[var(--text-secondary)]">Chargement du film...</p>
         </div>
       </div>
@@ -72,16 +73,16 @@ export default function MovieDetailPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center animate-fade-in-up">
-          <div className="w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white/30 mx-auto mb-6">
+          <div className="w-24 h-24 bg-[var(--color-1)]/20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white/30 mx-auto mb-6">
             ??
           </div>
           <h1 className="text-3xl font-bold text-[var(--text-primary)] mt-4 mb-2">Film non trouvé</h1>
           <p className="text-[var(--text-secondary)] mb-8">{error || "Ce film n'existe pas dans notre catalogue."}</p>
           <button
             onClick={() => router.push("/")}
-            className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 
+            className="px-8 py-3 bg-[var(--color-2)] 
                        text-white rounded-xl font-medium hover:opacity-90 
-                       transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25"
+                       transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-1)]/25"
           >
             Retour à l&apos;accueil
           </button>
@@ -111,7 +112,7 @@ export default function MovieDetailPage() {
               background: `linear-gradient(135deg, hsla(${hue1}, 60%, 30%, 0.4), hsla(${hue2}, 60%, 40%, 0.3))`,
             }}
           >
-            <div className="w-28 h-28 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
+            <div className="w-28 h-28 bg-[var(--color-1)]/30 rounded-2xl flex items-center justify-center text-4xl font-bold text-white/40 mx-auto backdrop-blur-sm">
               MR
             </div>
           </div>
@@ -143,9 +144,9 @@ export default function MovieDetailPage() {
                 <span
                   key={genre}
                   className="px-3 py-1 rounded-full text-xs font-medium 
-                             bg-purple-500/15 text-purple-400 
-                             border border-purple-500/20
-                             hover:bg-purple-500/25 transition-colors cursor-default"
+                             bg-[var(--color-1)]/15 text-[var(--color-1)] 
+                             border border-[var(--color-1)]/20
+                             hover:bg-[var(--color-1)]/25 transition-colors cursor-default"
                 >
                   {genre}
                 </span>
@@ -228,9 +229,7 @@ export default function MovieDetailPage() {
         className="inline-flex items-center space-x-2 text-[var(--text-secondary)] 
                    hover:text-[var(--text-primary)] transition-colors text-sm group"
       >
-        <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
+        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         <span>Retour à l&apos;accueil</span>
       </button>
     </div>
@@ -248,7 +247,7 @@ function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRa
     <div
       className="bg-[var(--card-bg)] rounded-xl overflow-hidden border border-[var(--card-border)]
                  hover:bg-[var(--card-hover)] transition-all duration-300 
-                 hover:scale-[1.03] hover:shadow-lg hover:shadow-purple-500/5 cursor-pointer group"
+                 hover:scale-[1.03] hover:shadow-lg hover:shadow-[var(--color-1)]/5 cursor-pointer group"
       onClick={() => router.push(`/movies/${movie.id}`)}
     >
       <div
@@ -257,17 +256,17 @@ function MovieCardSimple({ movie, predictedRating }: { movie: Movie; predictedRa
           background: `linear-gradient(135deg, hsla(${hue1}, 70%, 40%, 0.3), hsla(${(hue1 + 60) % 360}, 70%, 50%, 0.2))`,
         }}
       >
-        <div className="w-12 h-12 bg-gradient-to-br from-purple-500/40 to-pink-500/40 rounded-xl flex items-center justify-center text-base font-bold text-white/50 group-hover:scale-110 transition-transform duration-300">
+        <div className="w-12 h-12 bg-[var(--color-1)]/40 rounded-xl flex items-center justify-center text-base font-bold text-white/50 group-hover:scale-110 transition-transform duration-300">
           MR
         </div>
         {predictedRating && (
-          <div className="absolute top-2 right-2 bg-gradient-to-br from-yellow-400 to-amber-500 text-gray-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-            ★ {predictedRating.toFixed(1)}
+          <div className="absolute top-2 right-2 bg-yellow-500 text-gray-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            <Star className="w-3 h-3 inline fill-current" /> {predictedRating.toFixed(1)}
           </div>
         )}
       </div>
       <div className="p-3">
-        <p className="text-[var(--text-primary)] text-sm font-medium truncate group-hover:text-purple-400 transition-colors">
+        <p className="text-[var(--text-primary)] text-sm font-medium truncate group-hover:text-[var(--color-1)] transition-colors">
           {cleanTitle}
         </p>
         <p className="text-[var(--text-muted)] text-xs mt-1 truncate">{genres.join(", ")}</p>

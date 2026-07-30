@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { api, Movie } from "@/services/api";
+import { Search, X, ChevronRight, Loader2 } from "lucide-react";
 
 export default function MovieSearch() {
   const [query, setQuery] = useState("");
@@ -118,14 +119,9 @@ export default function MovieSearch() {
         />
         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">
           {loading ? (
-            <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
+            <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <Search className="w-5 h-5" />
           )}
         </span>
 
@@ -137,9 +133,7 @@ export default function MovieSearch() {
                        hover:text-[var(--text-primary)] transition-colors p-1"
             aria-label="Effacer la recherche"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-4 h-4" />
           </button>
         )}
       </div>
@@ -170,7 +164,7 @@ export default function MovieSearch() {
                              border-b border-[var(--card-border)] last:border-0
                              transition-all duration-150 ${
                     isSelected
-                      ? "bg-purple-500/10"
+                      ? "bg-[var(--color-1)]/10"
                       : "hover:bg-white/5"
                   }`}
                   onClick={() => navigateToMovie(movie)}
@@ -179,14 +173,14 @@ export default function MovieSearch() {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center 
                                   text-xs font-bold shrink-0 transition-all duration-300 ${
                     isSelected
-                      ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white scale-110"
-                      : "bg-gradient-to-br from-purple-500/30 to-pink-500/30 text-white/60"
+                      ? "bg-[var(--color-1)] text-white scale-110"
+                      : "bg-[var(--color-1)]/30 text-white/60"
                   }`}>
                     {cleanTitle.charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className={`text-sm font-medium truncate ${
-                      isSelected ? "text-purple-400" : "text-[var(--text-primary)]"
+                      isSelected ? "text-[var(--color-1)]" : "text-[var(--text-primary)]"
                     }`}>
                       {cleanTitle}
                     </p>
@@ -196,9 +190,7 @@ export default function MovieSearch() {
                     </p>
                   </div>
                   {isSelected && (
-                    <svg className="w-4 h-4 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <ChevronRight className="w-4 h-4 text-[var(--color-1)] shrink-0" />
                   )}
                 </button>
               );

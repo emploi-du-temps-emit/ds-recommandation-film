@@ -8,6 +8,16 @@
 }
 
 /* ============================================
+   Couleurs globales (palette unique)
+   ============================================ */
+:root {
+  --color-1: #4A150C;
+  --color-2: #414A0C;
+  --color-3: #0C414A;
+  --color-4: #150C4A;
+}
+
+/* ============================================
    Thème Dark (par défaut)
    ============================================ */
 :root,
@@ -15,31 +25,27 @@
   --background: #0a0a0a;
   --foreground: #ededed;
 
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-hover: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(74, 21, 12, 0.10);
+  --card-border: rgba(65, 74, 12, 0.25);
+  --card-hover: rgba(12, 65, 74, 0.15);
 
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-border: rgba(255, 255, 255, 0.1);
-  --input-focus: #a855f7;
+  --input-bg: rgba(21, 12, 74, 0.15);
+  --input-border: rgba(65, 74, 12, 0.30);
+  --input-focus: var(--color-1);
 
   --text-primary: #ffffff;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
 
-  --bg-gradient-from: #111827;
-  --bg-gradient-via: #1e1b4b;
-  --bg-gradient-to: #111827;
-
-  --accent: #a855f7;
-  --accent-secondary: #ec4899;
+  --accent: var(--color-1);
+  --accent-secondary: var(--color-2);
 
   --toast-bg: rgba(0, 0, 0, 0.8);
-  --nav-bg: rgba(17, 24, 39, 0.95);
-  --footer-border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(21, 12, 74, 0.92);
+  --footer-border: rgba(65, 74, 12, 0.25);
 
-  --skeleton-bg: rgba(255, 255, 255, 0.05);
-  --skeleton-shimmer: rgba(255, 255, 255, 0.1);
+  --skeleton-bg: rgba(21, 12, 74, 0.12);
+  --skeleton-shimmer: rgba(74, 21, 12, 0.18);
 }
 
 /* ============================================
@@ -50,27 +56,23 @@
   --foreground: #0f172a;
 
   --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(0, 0, 0, 0.1);
-  --card-hover: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(65, 74, 12, 0.20);
+  --card-hover: rgba(74, 21, 12, 0.06);
 
   --input-bg: rgba(255, 255, 255, 0.9);
-  --input-border: rgba(0, 0, 0, 0.15);
-  --input-focus: #7c3aed;
+  --input-border: rgba(65, 74, 12, 0.25);
+  --input-focus: var(--color-1);
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #94a3b8;
 
-  --bg-gradient-from: #f0f4ff;
-  --bg-gradient-via: #f5f0ff;
-  --bg-gradient-to: #f0f4ff;
-
-  --accent: #7c3aed;
-  --accent-secondary: #db2777;
+  --accent: var(--color-1);
+  --accent-secondary: var(--color-2);
 
   --toast-bg: rgba(255, 255, 255, 0.95);
   --nav-bg: rgba(248, 250, 252, 0.95);
-  --footer-border: rgba(0, 0, 0, 0.1);
+  --footer-border: rgba(65, 74, 12, 0.15);
 
   --skeleton-bg: rgba(0, 0, 0, 0.06);
   --skeleton-shimmer: rgba(0, 0, 0, 0.1);
@@ -114,10 +116,10 @@ body {
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(147, 51, 234, 0.5);
+    box-shadow: 0 0 5px color-mix(in srgb, var(--color-1) 60%, transparent);
   }
   50% {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.8);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-1) 90%, transparent);
   }
 }
 

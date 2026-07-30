@@ -35,7 +35,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-gradient-to-br from-[var(--bg-gradient-from)] via-[var(--bg-gradient-via)] to-[var(--bg-gradient-to)] text-[var(--text-primary)]">
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--text-primary)]">
         <ThemeProvider>
           <ToastProvider>
             <Navbar />
@@ -46,8 +46,8 @@ export default function RootLayout({
               <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
-                    <span className="font-medium bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <div className="w-6 h-6 bg-[var(--color-1)] rounded-md flex items-center justify-center text-[8px] font-bold text-white">MR</div>
+                    <span className="font-medium text-[var(--color-1)]">
                       MovieReco
                     </span>
                   </div>
